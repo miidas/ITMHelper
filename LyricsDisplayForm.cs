@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Kfstorm.LrcParser;
+using System.Drawing.Drawing2D;
 
 namespace ITMHelper
 {
@@ -20,7 +21,8 @@ namespace ITMHelper
 
         public LyricsDisplayForm()
         {
-            this.BackColor = Color.Black;
+            this.BackColor = Color.Lime;
+            this.TransparencyKey = Color.Lime;
             this.Opacity = 0.7;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Size = new Size(400, 50);
@@ -38,6 +40,12 @@ namespace ITMHelper
             textForm.Owner = this;
             textForm.ShowInTaskbar = false;
             textForm.Show();
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 0)), this.ClientRectangle);
         }
 
         public void OnChangePlayerPosition(float position)

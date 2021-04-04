@@ -49,20 +49,19 @@ namespace ITMHelper
             e.Graphics.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
 
             // Draw lyrics
-            System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
+            GraphicsPath gp = new GraphicsPath();
 
             StringFormat sf = new StringFormat();
             sf.LineAlignment = StringAlignment.Center;
             sf.Alignment = StringAlignment.Center;
 
-            Font myFont = new System.Drawing.Font("MS Gothic", 34, FontStyle.Regular);
-            SizeF stringSize = e.Graphics.MeasureString(str, myFont);
+            gp.AddString(str, new FontFamily("MS Gothic"), (int)FontStyle.Regular, 34, new Point(0, 0), sf);
 
-            this.Width = (int)stringSize.Width;
+            this.Width = (int) Math.Round(gp.GetBounds().Width * 1.2);
 
-            gp.AddString(str, new FontFamily("MS Gothic"),
-                (int)FontStyle.Regular, 34,
-                new Point(this.Width / 2, (this.Height / 2) + 2), sf);
+            gp.Reset();
+
+            gp.AddString(str, new FontFamily("MS Gothic"), (int)FontStyle.Regular, 34, new Point(this.Width / 2, (int) Math.Round((this.Height / 2) * 1.1)), sf);
 
             var lp = new Point(
                 (System.Windows.Forms.Screen.GetBounds(this).Width / 2) - (this.Width / 2),

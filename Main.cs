@@ -73,6 +73,7 @@ namespace ITMHelper
                         var lrcText = System.IO.File.ReadAllText($"{lyricsDir}\\{currentTrack.Name} - {currentTrack.Artist}.lrc");
                         displayForm.lrcFile = LrcFile.FromText(lrcText);
 
+                        //Console.WriteLine(currentTrack.TrackDatabaseID);
                     }
                     catch (Exception ex)
                     {
@@ -95,6 +96,7 @@ namespace ITMHelper
             if ((prevTrack == null && currentTrack != null) || (prevTrack != null && currentTrack == null)
                 || ((prevTrack != null && currentTrack != null) && !String.Equals(currentTrack.Name, prevTrack.Name)))
             {
+                // TODO: Use TrackDatabaseID instead of currentTrack information
                 Main_TrackChanged(currentTrack);
                 prevTrack = currentTrack;
             }
