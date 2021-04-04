@@ -76,7 +76,7 @@ namespace ITMHelper
                     }
                     catch (FileNotFoundException ex)
                     {
-                        // Do nothing
+                        displayForm.lrcFile = null;
                     }
                 }
             }
