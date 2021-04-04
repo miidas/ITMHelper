@@ -42,13 +42,13 @@ namespace ITMHelper
                 form.Show();
             }
 
-            //e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
             e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
             e.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
             e.Graphics.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
 
+            // Draw lyrics
             System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
 
             StringFormat sf = new StringFormat();
@@ -58,7 +58,7 @@ namespace ITMHelper
             Font myFont = new System.Drawing.Font("MS Gothic", 34, FontStyle.Regular);
             SizeF stringSize = e.Graphics.MeasureString(str, myFont);
 
-            this.Width = (int) stringSize.Width;
+            this.Width = (int)stringSize.Width;
 
             gp.AddString(str, new FontFamily("MS Gothic"),
                 (int)FontStyle.Regular, 34,
@@ -73,14 +73,10 @@ namespace ITMHelper
             form.Location = lp;
             form.Width = this.Width;
 
-            //パスの線分を描画
             Pen drawPen = new Pen(Color.Blue, 3.0F);
-
-            e.Graphics.DrawPath(drawPen, gp);
-
-            //塗る
             Brush fillBrush = new SolidBrush(Color.White);
 
+            e.Graphics.DrawPath(drawPen, gp);
             e.Graphics.FillPath(fillBrush, gp);
 
             drawPen.Dispose();
