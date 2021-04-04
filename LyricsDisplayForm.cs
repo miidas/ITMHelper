@@ -50,6 +50,11 @@ namespace ITMHelper
 
             this.currentText = lineLyric.Content;
 
+            RefreshText();
+        }
+
+        public void RefreshText()
+        {
             textForm.Refresh();
         }
 

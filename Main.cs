@@ -57,6 +57,10 @@ namespace ITMHelper
         {
             if (currentTrack != null)
             {
+                // Clear current displayed text
+                displayForm.currentText = "";
+                displayForm.RefreshText();
+
                 this.TitleTextBox.Text = currentTrack.Name;
                 this.AlbumTextBox.Text = currentTrack.Album;
                 this.ArtistTextBox.Text = currentTrack.Artist;
