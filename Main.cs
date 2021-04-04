@@ -74,7 +74,7 @@ namespace ITMHelper
                         displayForm.lrcFile = LrcFile.FromText(lrcText);
 
                     }
-                    catch (FileNotFoundException ex)
+                    catch (Exception ex)
                     {
                         displayForm.lrcFile = null;
                     }
