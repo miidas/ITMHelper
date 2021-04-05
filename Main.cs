@@ -21,12 +21,11 @@ namespace ITMHelper
 
         LyricsDisplayForm displayForm;
 
-        private long prevPlayerPosition = 0L;
-        private long prevTimerCount = 0;
-        private long prevTimerDivider = 0;
-
         private int prevPlayerState = -1;
 
+        private long prevPlayerPosition = -1L;
+        private int prevDateMillisecond = -1;
+        private int prevDateSecond = -1;
         public Main()
         {
             InitializeComponent();
@@ -49,6 +48,8 @@ namespace ITMHelper
             displayForm.Show();
 
             this.ActiveControl = NowPlayingButton; // Setting the focus on NowPlaying button
+
+            System.Diagnostics.Process.GetCurrentProcess().PriorityClass = System.Diagnostics.ProcessPriorityClass.RealTime; // Change app priority?
         }
 
         dynamic prevTrack;
@@ -126,13 +127,10 @@ namespace ITMHelper
 
         private void Main_Tick(object sender, EventArgs e)
         {
-            // Need to use another timer or rethink the time synchronization algorithm...
             var position = ith.getPlayerPosition();
             if (position != null)
             {
-                prevTimerCount++;
-
-                if (prevTimerDivider != 0)
+                if (this.prevDateMillisecond != -1)
                 {
                     if (position - prevPlayerPosition == 1)
                     {
@@ -140,7 +138,8 @@ namespace ITMHelper
                     }
                     else
                     {
-                        displayForm.OnChangePlayerPosition(position + (1.0f / prevTimerDivider) * prevTimerCount);
+                        var date = DateTime.Now;
+                        displayForm.OnChangePlayerPosition(position + ((DateTime.Now.Millisecond - this.prevDateMillisecond) / 1000.0d) + (date.Second != this.prevDateSecond? 1 : 0));
                     }
                 }
 
@@ -148,10 +147,11 @@ namespace ITMHelper
                 {
                     if (position - prevPlayerPosition == 1)
                     {
-                        prevTimerDivider = prevTimerCount;
+                        var date = DateTime.Now;
+                        this.prevDateMillisecond = date.Millisecond;
+                        this.prevDateSecond = date.Second;
                     }
                     prevPlayerPosition = position;
-                    prevTimerCount = 0;
                 }
             }
         }
@@ -172,6 +172,11 @@ namespace ITMHelper
             {
                 displayForm.HideLyrics();
             }
+        }
+
+        private void DelayTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

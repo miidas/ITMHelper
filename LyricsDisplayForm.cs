@@ -48,9 +48,13 @@ namespace ITMHelper
             e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 0)), this.ClientRectangle);
         }
 
-        public void OnChangePlayerPosition(float position)
+        public void OnChangePlayerPosition(double position)
         {
             if (lrcFile == null) return;
+
+            //Console.WriteLine(position);
+
+            position += 0.5f; // 100ms
 
             var lineLyric = lrcFile.BeforeOrAt(TimeSpan.FromSeconds(position));
 

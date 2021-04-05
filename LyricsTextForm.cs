@@ -61,7 +61,7 @@ namespace ITMHelper
 
             gp.Reset();
 
-            gp.AddString(str, new FontFamily("MS Gothic"), (int)FontStyle.Regular, 34, new Point(this.Width / 2, (int) Math.Round((this.Height / 2) * 1.1)), sf);
+            gp.AddString(str, new FontFamily("MS Gothic"), (int)FontStyle.Regular, 34, new Point((int) Math.Round((this.Width / 2) * 1.01), (int) Math.Round((this.Height / 2) * 1.1)), sf);
 
             var lp = new Point(
                 (System.Windows.Forms.Screen.GetBounds(this).Width / 2) - (this.Width / 2),

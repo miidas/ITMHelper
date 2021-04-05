@@ -37,12 +37,18 @@ namespace ITMHelper
             this.ArtistLabel = new System.Windows.Forms.Label();
             this.NowPlayingButton = new System.Windows.Forms.Button();
             this.ShowLyricsCheckBox = new System.Windows.Forms.CheckBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutITMHelperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // TitleLabel
             // 
             this.TitleLabel.AutoSize = true;
-            this.TitleLabel.Location = new System.Drawing.Point(13, 13);
+            this.TitleLabel.Location = new System.Drawing.Point(8, 24);
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(27, 13);
             this.TitleLabel.TabIndex = 0;
@@ -51,7 +57,7 @@ namespace ITMHelper
             // TitleTextBox
             // 
             this.TitleTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TitleTextBox.Location = new System.Drawing.Point(16, 29);
+            this.TitleTextBox.Location = new System.Drawing.Point(11, 40);
             this.TitleTextBox.Name = "TitleTextBox";
             this.TitleTextBox.ReadOnly = true;
             this.TitleTextBox.Size = new System.Drawing.Size(341, 20);
@@ -59,7 +65,7 @@ namespace ITMHelper
             // 
             // AlbumTextBox
             // 
-            this.AlbumTextBox.Location = new System.Drawing.Point(16, 68);
+            this.AlbumTextBox.Location = new System.Drawing.Point(11, 79);
             this.AlbumTextBox.Name = "AlbumTextBox";
             this.AlbumTextBox.ReadOnly = true;
             this.AlbumTextBox.Size = new System.Drawing.Size(341, 20);
@@ -67,7 +73,7 @@ namespace ITMHelper
             // 
             // ArtistTextBox
             // 
-            this.ArtistTextBox.Location = new System.Drawing.Point(17, 107);
+            this.ArtistTextBox.Location = new System.Drawing.Point(12, 118);
             this.ArtistTextBox.Name = "ArtistTextBox";
             this.ArtistTextBox.ReadOnly = true;
             this.ArtistTextBox.Size = new System.Drawing.Size(340, 20);
@@ -76,7 +82,7 @@ namespace ITMHelper
             // AlbumLabel
             // 
             this.AlbumLabel.AutoSize = true;
-            this.AlbumLabel.Location = new System.Drawing.Point(13, 52);
+            this.AlbumLabel.Location = new System.Drawing.Point(8, 63);
             this.AlbumLabel.Name = "AlbumLabel";
             this.AlbumLabel.Size = new System.Drawing.Size(36, 13);
             this.AlbumLabel.TabIndex = 4;
@@ -85,7 +91,7 @@ namespace ITMHelper
             // ArtistLabel
             // 
             this.ArtistLabel.AutoSize = true;
-            this.ArtistLabel.Location = new System.Drawing.Point(14, 91);
+            this.ArtistLabel.Location = new System.Drawing.Point(9, 102);
             this.ArtistLabel.Name = "ArtistLabel";
             this.ArtistLabel.Size = new System.Drawing.Size(30, 13);
             this.ArtistLabel.TabIndex = 5;
@@ -94,7 +100,7 @@ namespace ITMHelper
             // NowPlayingButton
             // 
             this.NowPlayingButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NowPlayingButton.Location = new System.Drawing.Point(374, 29);
+            this.NowPlayingButton.Location = new System.Drawing.Point(382, 39);
             this.NowPlayingButton.Name = "NowPlayingButton";
             this.NowPlayingButton.Size = new System.Drawing.Size(164, 98);
             this.NowPlayingButton.TabIndex = 6;
@@ -107,7 +113,7 @@ namespace ITMHelper
             this.ShowLyricsCheckBox.AutoSize = true;
             this.ShowLyricsCheckBox.Checked = true;
             this.ShowLyricsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ShowLyricsCheckBox.Location = new System.Drawing.Point(17, 134);
+            this.ShowLyricsCheckBox.Location = new System.Drawing.Point(12, 144);
             this.ShowLyricsCheckBox.Name = "ShowLyricsCheckBox";
             this.ShowLyricsCheckBox.Size = new System.Drawing.Size(79, 17);
             this.ShowLyricsCheckBox.TabIndex = 7;
@@ -115,11 +121,50 @@ namespace ITMHelper
             this.ShowLyricsCheckBox.UseVisualStyleBackColor = true;
             this.ShowLyricsCheckBox.CheckedChanged += new System.EventHandler(this.ShowLyricsCheckBox_CheckedChanged);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(558, 24);
+            this.menuStrip1.TabIndex = 8;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutITMHelperToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutITMHelperToolStripMenuItem
+            // 
+            this.aboutITMHelperToolStripMenuItem.Name = "aboutITMHelperToolStripMenuItem";
+            this.aboutITMHelperToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutITMHelperToolStripMenuItem.Text = "About ITMHelper";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(558, 160);
+            this.ClientSize = new System.Drawing.Size(558, 168);
             this.Controls.Add(this.ShowLyricsCheckBox);
             this.Controls.Add(this.NowPlayingButton);
             this.Controls.Add(this.ArtistLabel);
@@ -128,10 +173,14 @@ namespace ITMHelper
             this.Controls.Add(this.AlbumTextBox);
             this.Controls.Add(this.TitleTextBox);
             this.Controls.Add(this.TitleLabel);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "Main";
             this.Text = "ITMHelper";
             this.Load += new System.EventHandler(this.Main_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -147,6 +196,11 @@ namespace ITMHelper
         private System.Windows.Forms.Label ArtistLabel;
         private System.Windows.Forms.Button NowPlayingButton;
         private System.Windows.Forms.CheckBox ShowLyricsCheckBox;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutITMHelperToolStripMenuItem;
     }
 }
 
