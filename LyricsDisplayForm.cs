@@ -54,7 +54,7 @@ namespace ITMHelper
 
             //Console.WriteLine(position);
 
-            position += 0.5f; // 100ms
+            position += 1.0f;
 
             var lineLyric = lrcFile.BeforeOrAt(TimeSpan.FromSeconds(position));
 

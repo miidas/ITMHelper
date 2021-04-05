@@ -130,24 +130,17 @@ namespace ITMHelper
             var position = ith.getPlayerPosition();
             if (position != null)
             {
+                var date = DateTime.Now;
+
                 if (this.prevDateMillisecond != -1)
                 {
-                    if (position - prevPlayerPosition == 1)
-                    {
-                        displayForm.OnChangePlayerPosition(position);
-                    }
-                    else
-                    {
-                        var date = DateTime.Now;
-                        displayForm.OnChangePlayerPosition(position + ((DateTime.Now.Millisecond - this.prevDateMillisecond) / 1000.0d) + (date.Second != this.prevDateSecond? 1 : 0));
-                    }
+                    displayForm.OnChangePlayerPosition(position - (position - prevPlayerPosition) + ((DateTime.Now.Millisecond - this.prevDateMillisecond) / 1000.0d) + (date.Second != this.prevDateSecond ? 1 : 0));
                 }
 
                 if (position != prevPlayerPosition)
                 {
                     if (position - prevPlayerPosition == 1)
                     {
-                        var date = DateTime.Now;
                         this.prevDateMillisecond = date.Millisecond;
                         this.prevDateSecond = date.Second;
                     }
