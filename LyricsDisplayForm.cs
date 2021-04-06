@@ -52,6 +52,14 @@ namespace ITMHelper
         {
             if (lrcFile == null) return;
 
+            // Check if the mouse pointer is in ClientRectangle
+            if (this.ClientRectangle.Contains(PointToClient(Control.MousePosition)))
+            {
+                this.currentText = "";
+                RefreshText();
+                return;
+            }
+
             //Console.WriteLine(position);
 
             position += 1.0f;
