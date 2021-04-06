@@ -8,6 +8,7 @@ using System.Text;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 using Kfstorm.LrcParser;
 
 namespace ITMHelper
@@ -170,6 +171,11 @@ namespace ITMHelper
         private void DelayTextBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void aboutITMHelperToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"ITMHelper Version {Application.ProductVersion}\niTunes Version {ith.getVersion()}", "About ITMHelper");
         }
     }
 }

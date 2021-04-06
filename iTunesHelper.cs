@@ -37,5 +37,10 @@ namespace ITMHelper
         {
             return iTunesApp.PlayerState;
         }
+
+        public dynamic getVersion()
+        {
+            return iTunesApp.Version;
+        }
     }
 }
