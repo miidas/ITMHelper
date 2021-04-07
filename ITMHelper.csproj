@@ -53,6 +53,12 @@
     <Compile Include="LyricsDisplayForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="LyricsEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LyricsEditForm.Designer.cs">
+      <DependentUpon>LyricsEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LyricsTextForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +70,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="LyricsEditForm.resx">
+      <DependentUpon>LyricsEditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>

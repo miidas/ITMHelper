@@ -39,7 +39,7 @@ namespace ITMHelper
             this.ShowLyricsCheckBox = new System.Windows.Forms.CheckBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editLrcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutITMHelperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
@@ -135,16 +135,17 @@ namespace ITMHelper
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem});
+            this.editLrcToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // openToolStripMenuItem
+            // editLrcToolStripMenuItem
             // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.openToolStripMenuItem.Text = "Open";
+            this.editLrcToolStripMenuItem.Name = "editLrcToolStripMenuItem";
+            this.editLrcToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editLrcToolStripMenuItem.Text = "Edit lrc";
+            this.editLrcToolStripMenuItem.Click += new System.EventHandler(this.editLrcToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -157,7 +158,7 @@ namespace ITMHelper
             // aboutITMHelperToolStripMenuItem
             // 
             this.aboutITMHelperToolStripMenuItem.Name = "aboutITMHelperToolStripMenuItem";
-            this.aboutITMHelperToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutITMHelperToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.aboutITMHelperToolStripMenuItem.Text = "About ITMHelper";
             this.aboutITMHelperToolStripMenuItem.Click += new System.EventHandler(this.aboutITMHelperToolStripMenuItem_Click);
             // 
@@ -200,7 +201,7 @@ namespace ITMHelper
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editLrcToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutITMHelperToolStripMenuItem;
     }
 }

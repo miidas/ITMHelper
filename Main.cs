@@ -55,6 +55,12 @@ namespace ITMHelper
 
         dynamic prevTrack;
 
+        public void Main_ReloadLyrics()
+        {
+            var currentTrack = ith.getCurrentTrack();
+            Main_TrackChanged(currentTrack);
+        }
+
         private void Main_TrackChanged(dynamic currentTrack)
         {
             if (currentTrack != null)
@@ -135,6 +141,7 @@ namespace ITMHelper
 
                 if (this.prevDateMillisecond != -1)
                 {
+                    // Need to implement the step/slew mode like ntp
                     displayForm.OnChangePlayerPosition(position - (position - prevPlayerPosition) + ((DateTime.Now.Millisecond - this.prevDateMillisecond) / 1000.0d) + (date.Second != this.prevDateSecond ? 1 : 0));
                 }
 
@@ -176,6 +183,17 @@ namespace ITMHelper
         private void aboutITMHelperToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show($"ITMHelper Version {Application.ProductVersion}\niTunes Version {ith.getVersion()}", "About ITMHelper");
+        }
+
+        private void editLrcToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var currentTrack = ith.getCurrentTrack();
+            if (currentTrack != null)
+            {
+                var lyricsDir = System.Environment.CurrentDirectory + "\\Lyrics";
+                var editForm = new LyricsEditForm($"{lyricsDir}\\{currentTrack.Name} - {currentTrack.Artist}.lrc");
+                editForm.ShowDialog(this);
+            }
         }
     }
 }
