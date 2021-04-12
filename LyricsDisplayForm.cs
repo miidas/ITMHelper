@@ -48,29 +48,44 @@ namespace ITMHelper
             e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 0)), this.ClientRectangle);
         }
 
+        //double prevPos = 0; // for debug
         public void OnChangePlayerPosition(double position)
         {
+            /*if (position < prevPos)
+            {
+                Console.WriteLine($"Wooosh! PS:{prevPos}, CP:{position}");
+            }
+            Console.WriteLine($"POS: {position}, DIFF: {position - prevPos}");
+            prevPos = position;*/
+
             if (lrcFile == null) return;
 
             // Check if the mouse pointer is in ClientRectangle
             if (this.ClientRectangle.Contains(PointToClient(Control.MousePosition)))
             {
-                this.currentText = "";
-                RefreshText();
+                ClearText();
                 return;
             }
-
-            //Console.WriteLine(position);
 
             position += 1.0f;
 
             var lineLyric = lrcFile.BeforeOrAt(TimeSpan.FromSeconds(position));
 
-            if (lineLyric == null || String.Equals(lineLyric.Content, this.currentText)) return;
+            if (lineLyric == null || lineLyric.Content == null)
+            {
+                ClearText();
+            }
+            else if (!String.Equals(lineLyric.Content, this.currentText))
+            {
+                this.currentText = lineLyric.Content;
+                RefreshText();
+            }
+        }
 
-            this.currentText = lineLyric.Content;
-
-            RefreshText();
+        public void ClearText()
+        {
+            this.currentText = "";
+            this.RefreshText();
         }
 
         public void RefreshText()

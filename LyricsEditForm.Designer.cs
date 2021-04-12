@@ -35,6 +35,7 @@ namespace ITMHelper
             // 
             // lrcTextBox
             // 
+            this.lrcTextBox.Font = new System.Drawing.Font("MS Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lrcTextBox.Location = new System.Drawing.Point(13, 13);
             this.lrcTextBox.Name = "lrcTextBox";
             this.lrcTextBox.Size = new System.Drawing.Size(775, 396);

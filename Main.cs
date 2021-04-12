@@ -25,8 +25,8 @@ namespace ITMHelper
         private int prevPlayerState = -1;
 
         private long prevPlayerPosition = -1L;
-        private int prevDateMillisecond = -1;
-        private int prevDateSecond = -1;
+        private DateTime? prevDate;
+
         public Main()
         {
             InitializeComponent();
@@ -81,9 +81,9 @@ namespace ITMHelper
                         var lrcText = System.IO.File.ReadAllText($"{lyricsDir}\\{currentTrack.Name} - {currentTrack.Artist}.lrc");
                         displayForm.lrcFile = LrcFile.FromText(lrcText);
 
-                        //Console.WriteLine(currentTrack.TrackDatabaseID);
+                        //Console.WriteLine(currentTrack.TrackDatabaseID); // TODO
                     }
-                    catch (Exception ex)
+                    catch (Exception ex) // TODO
                     {
                         displayForm.lrcFile = null;
                     }
@@ -137,20 +137,21 @@ namespace ITMHelper
             var position = ith.getPlayerPosition();
             if (position != null)
             {
-                var date = DateTime.Now;
-
-                if (this.prevDateMillisecond != -1)
+                if (this.prevDate.HasValue)
                 {
                     // Need to implement the step/slew mode like ntp
-                    displayForm.OnChangePlayerPosition(position - (position - prevPlayerPosition) + ((DateTime.Now.Millisecond - this.prevDateMillisecond) / 1000.0d) + (date.Second != this.prevDateSecond ? 1 : 0));
+                    displayForm.OnChangePlayerPosition(position - (position - prevPlayerPosition) + DateTime.Now.Subtract(this.prevDate.Value).TotalSeconds);
                 }
 
                 if (position != prevPlayerPosition)
                 {
                     if (position - prevPlayerPosition == 1)
                     {
-                        this.prevDateMillisecond = date.Millisecond;
-                        this.prevDateSecond = date.Second;
+                        this.prevDate = DateTime.Now;
+                    }
+                    else
+                    {
+                        this.prevDate = null;
                     }
                     prevPlayerPosition = position;
                 }
