@@ -27,6 +27,8 @@ namespace ITMHelper
         private long prevPlayerPosition = -1L;
         private DateTime? prevDate;
 
+        private string lrcPath = null;
+
         public Main()
         {
             InitializeComponent();
@@ -78,10 +80,17 @@ namespace ITMHelper
                 {
                     try
                     {
-                        var lrcText = System.IO.File.ReadAllText($"{lyricsDir}\\{currentTrack.Name} - {currentTrack.Artist}.lrc");
-                        displayForm.lrcFile = LrcFile.FromText(lrcText);
+                        // Use escaped filename instead of TrackDatabaseID for readability
+                        this.lrcPath = $"{lyricsDir}\\" 
+                            + String.Join(
+                                "_", 
+                                $"{currentTrack.Name} - {currentTrack.Artist}.lrc"
+                                .Split(System.IO.Path.GetInvalidFileNameChars(), StringSplitOptions.RemoveEmptyEntries)
+                                )
+                            .TrimEnd('.');
+                        var lrcText = System.IO.File.ReadAllText(this.lrcPath);
 
-                        //Console.WriteLine(currentTrack.TrackDatabaseID); // TODO
+                        displayForm.lrcFile = LrcFile.FromText(lrcText);
                     }
                     catch (Exception ex) // TODO
                     {
@@ -191,8 +200,7 @@ namespace ITMHelper
             var currentTrack = ith.getCurrentTrack();
             if (currentTrack != null)
             {
-                var lyricsDir = System.Environment.CurrentDirectory + "\\Lyrics";
-                var editForm = new LyricsEditForm($"{lyricsDir}\\{currentTrack.Name} - {currentTrack.Artist}.lrc");
+                var editForm = new LyricsEditForm(this.lrcPath);
                 editForm.ShowDialog(this);
             }
         }

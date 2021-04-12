@@ -73,6 +73,9 @@
     <EmbeddedResource Include="LyricsEditForm.resx">
       <DependentUpon>LyricsEditForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LyricsTextForm.resx">
+      <DependentUpon>LyricsTextForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
