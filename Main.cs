@@ -117,9 +117,8 @@ namespace ITMHelper
             }
 
             if ((prevTrack == null && currentTrack != null) || (prevTrack != null && currentTrack == null)
-                || ((prevTrack != null && currentTrack != null) && !String.Equals(currentTrack.Name, prevTrack.Name)))
+                || ((prevTrack != null && currentTrack != null) && currentTrack.TrackDatabaseID != prevTrack.TrackDatabaseID))
             {
-                // TODO: Use TrackDatabaseID instead of currentTrack information
                 Main_TrackChanged(currentTrack);
                 prevTrack = currentTrack;
             }
