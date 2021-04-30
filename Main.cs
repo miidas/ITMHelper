@@ -49,7 +49,6 @@ namespace ITMHelper
 
             displayForm = new LyricsDisplayForm();
             displayForm.ShowInTaskbar = false;
-            displayForm.Show();
 
             this.ActiveControl = NowPlayingButton; // Setting the focus on NowPlaying button
 
@@ -92,10 +91,12 @@ namespace ITMHelper
                         var lrcText = System.IO.File.ReadAllText(this.lrcPath);
 
                         displayForm.lrcFile = LrcFile.FromText(lrcText);
+                        //displayForm.ShowLyrics();
                     }
                     catch (Exception ex) // TODO
                     {
                         displayForm.lrcFile = null;
+                        //displayForm.HideLyrics();
                     }
                 }
             }

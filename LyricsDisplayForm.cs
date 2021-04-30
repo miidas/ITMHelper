@@ -14,7 +14,7 @@ namespace ITMHelper
 {
     class LyricsDisplayForm : Form
     {
-        public string currentText = "ITMHelper";
+        public string currentText = "";
         public ILrcFile lrcFile = null;
 
         private LyricsTextForm textForm;
@@ -39,7 +39,6 @@ namespace ITMHelper
             textForm.ClientSize = this.ClientSize;
             textForm.Owner = this;
             textForm.ShowInTaskbar = false;
-            textForm.Show();
         }
 
         protected override void OnPaint(PaintEventArgs e)
