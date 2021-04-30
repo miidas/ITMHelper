@@ -9,6 +9,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using Kfstorm.LrcParser;
 
 namespace ITMHelper
@@ -109,6 +110,11 @@ namespace ITMHelper
         private void Main_Info(object sender, EventArgs e)
         {
             var currentTrack = ith.getCurrentTrack();
+            
+            if (prevTrack != null && !ith.IsTrackInLibrary(prevTrack))
+            {
+                prevTrack = null;
+            }
 
             if ((prevTrack == null && currentTrack != null) || (prevTrack != null && currentTrack == null)
                 || ((prevTrack != null && currentTrack != null) && !String.Equals(currentTrack.Name, prevTrack.Name)))
@@ -128,7 +134,6 @@ namespace ITMHelper
                 }
             }
         }
-
         private void Main_PlayerStateChanged(int playerState)
         {
             if (playerState == 0x00) // ITPlayerStateStopped  

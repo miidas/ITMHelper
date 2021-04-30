@@ -21,6 +21,19 @@ namespace ITMHelper
         {
             return iTunesApp.CurrentTrack;
         }
+
+        public Boolean IsTrackInLibrary(dynamic track)
+        {
+            try
+            {
+                return track.TrackDatabaseID == 0 || true;
+            }
+            catch (COMException ex)
+            {
+                return false;
+            }
+        }
+
         public dynamic getPlayerPosition()
         {
             try
