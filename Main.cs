@@ -30,6 +30,8 @@ namespace ITMHelper
 
         private string lrcPath = null;
 
+        private object prevTrack;
+
         public Main()
         {
             InitializeComponent();
@@ -55,21 +57,21 @@ namespace ITMHelper
             System.Diagnostics.Process.GetCurrentProcess().PriorityClass = System.Diagnostics.ProcessPriorityClass.RealTime; // Change app priority?
         }
 
-        dynamic prevTrack;
-
         public void Main_ReloadLyrics()
         {
             var currentTrack = ith.getCurrentTrack();
             Main_TrackChanged(currentTrack);
         }
 
-        private void Main_TrackChanged(dynamic currentTrack)
+        private void Main_TrackChanged(object currentTrackObj)
         {
-            if (currentTrack != null)
+            if (currentTrackObj != null)
             {
                 // Clear current displayed text
                 displayForm.currentText = "";
                 displayForm.RefreshText();
+
+                var currentTrack = (dynamic) currentTrackObj;
 
                 this.TitleTextBox.Text = currentTrack.Name;
                 this.AlbumTextBox.Text = currentTrack.Album;
@@ -111,14 +113,14 @@ namespace ITMHelper
         private void Main_Info(object sender, EventArgs e)
         {
             var currentTrack = ith.getCurrentTrack();
-            
+
             if (prevTrack != null && !ith.IsTrackInLibrary(prevTrack))
             {
                 prevTrack = null;
             }
 
             if ((prevTrack == null && currentTrack != null) || (prevTrack != null && currentTrack == null)
-                || ((prevTrack != null && currentTrack != null) && currentTrack.TrackDatabaseID != prevTrack.TrackDatabaseID))
+                || ((prevTrack != null && currentTrack != null) && ((dynamic)currentTrack).TrackDatabaseID != ((dynamic)prevTrack).TrackDatabaseID))
             {
                 Main_TrackChanged(currentTrack);
                 prevTrack = currentTrack;
@@ -126,7 +128,7 @@ namespace ITMHelper
 
             if (ShowLyricsCheckBox.Checked)
             {
-                var playerState = ith.getPlayerState();
+                var playerState = (dynamic) ith.getPlayerState();
                 if (playerState != prevPlayerState)
                 {
                     Main_PlayerStateChanged(playerState);
@@ -148,7 +150,7 @@ namespace ITMHelper
 
         private void Main_Tick(object sender, EventArgs e)
         {
-            var position = ith.getPlayerPosition();
+            var position = (dynamic) ith.getPlayerPosition();
             if (position != null)
             {
                 if (this.prevDate.HasValue)

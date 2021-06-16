@@ -9,7 +9,7 @@ namespace ITMHelper
 {
     class iTunesHelper
     {
-        dynamic iTunesApp;
+        object iTunesApp;
 
         public iTunesHelper()
         {
@@ -17,16 +17,16 @@ namespace ITMHelper
             this.iTunesApp = Activator.CreateInstance(iTunesType);
         }
 
-        public dynamic getCurrentTrack()
+        public object getCurrentTrack()
         {
-            return iTunesApp.CurrentTrack;
+            return ((dynamic)iTunesApp).CurrentTrack;
         }
 
-        public Boolean IsTrackInLibrary(dynamic track)
+        public Boolean IsTrackInLibrary(object track)
         {
             try
             {
-                return track.TrackDatabaseID == 0 || true;
+                return ((dynamic)track).TrackDatabaseID == 0 || true;
             }
             catch (COMException ex)
             {
@@ -34,11 +34,11 @@ namespace ITMHelper
             }
         }
 
-        public dynamic getPlayerPosition()
+        public object getPlayerPosition()
         {
             try
             {
-                return iTunesApp.PlayerPosition;
+                return ((dynamic)iTunesApp).PlayerPosition;
             }
             catch (COMException ex)
             {
@@ -46,14 +46,14 @@ namespace ITMHelper
             }
         }
 
-        public dynamic getPlayerState()
+        public object getPlayerState()
         {
-            return iTunesApp.PlayerState;
+            return ((dynamic)iTunesApp).PlayerState;
         }
 
-        public dynamic getVersion()
+        public object getVersion()
         {
-            return iTunesApp.Version;
+            return ((dynamic)iTunesApp).Version;
         }
     }
 }
