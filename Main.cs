@@ -73,9 +73,16 @@ namespace ITMHelper
 
                 var currentTrack = (dynamic) currentTrackObj;
 
-                this.TitleTextBox.Text = currentTrack.Name;
-                this.AlbumTextBox.Text = currentTrack.Album;
-                this.ArtistTextBox.Text = currentTrack.Artist;
+                try
+                {
+                    this.TitleTextBox.Text = currentTrack.Name;
+                    this.AlbumTextBox.Text = currentTrack.Album;
+                    this.ArtistTextBox.Text = currentTrack.Artist;
+                }
+                catch (COMException ex)
+                {
+                    return;
+                }
 
                 var lyricsDir = System.Environment.CurrentDirectory + "\\Lyrics";
                 if (Directory.Exists(lyricsDir))
