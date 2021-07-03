@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Data;
-using System.Drawing;
 using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ITMHelper
@@ -42,44 +35,52 @@ namespace ITMHelper
                 form.Show();
             }
 
-            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
             e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
             e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
-            e.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+            e.Graphics.CompositingQuality = CompositingQuality.HighQuality;
             e.Graphics.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
 
             // Draw lyrics
-            GraphicsPath gp = new GraphicsPath();
+            using (GraphicsPath gp = new GraphicsPath())
+            {
+                StringFormat sf = new StringFormat();
 
-            StringFormat sf = new StringFormat();
-            sf.LineAlignment = StringAlignment.Center;
-            sf.Alignment = StringAlignment.Center;
+                Pen drawPen = new Pen(Color.Blue, 3.0F);
+                Brush fillBrush = new SolidBrush(Color.White);
+             
+                gp.AddString("o", new FontFamily("MS Gothic"), (int)FontStyle.Regular, e.Graphics.DpiY * 28 / 72f, new Point(0, 0), sf);
+                RectangleF spaceBound = gp.GetBounds();
+                gp.Reset();
 
-            gp.AddString(str, new FontFamily("MS Gothic"), (int)FontStyle.Regular, 34, new Point(0, 0), sf);
+                gp.AddString(str, new FontFamily("MS Gothic"), (int)FontStyle.Regular, e.Graphics.DpiY * 28 / 72f, new Point(0, 0), sf);
 
-            this.Width = (int) Math.Round(gp.GetBounds().Width) + 80; // TODO: fix
+                RectangleF rect = gp.GetBounds();
 
-            gp.Reset();
+                this.Width = (int) Math.Round(rect.Width + spaceBound.Width * 5.15);
+                this.Height = (int) Math.Round(rect.Height + spaceBound.Height);
 
-            gp.AddString(str, new FontFamily("MS Gothic"), (int)FontStyle.Regular, 34, new Point((int) Math.Round((this.Width / 2) * 1.00), (int) Math.Round((this.Height / 2) * 1.1)), sf);
+                var lp = new Point(
+                    (Screen.GetBounds(this).Width / 2) - (this.Width / 2),
+                    form.Location.Y
+                );
 
-            var lp = new Point(
-                (System.Windows.Forms.Screen.GetBounds(this).Width / 2) - (this.Width / 2),
-                form.Location.Y
-            );
+                this.Location = lp;
+                form.Location = lp;
+                form.Width = this.Width;
+                form.Height = this.Height;
 
-            this.Location = lp;
-            form.Location = lp;
-            form.Width = this.Width;
+                Matrix matrix = new Matrix();
+                matrix.Translate(-rect.X, -rect.Y);
+                matrix.Translate((this.Width - rect.Width) / 2, (this.Height - rect.Height) / 2);
+                gp.Transform(matrix);
 
-            Pen drawPen = new Pen(Color.Blue, 3.0F);
-            Brush fillBrush = new SolidBrush(Color.White);
+                e.Graphics.DrawPath(drawPen, gp);
+                e.Graphics.FillPath(fillBrush, gp);
 
-            e.Graphics.DrawPath(drawPen, gp);
-            e.Graphics.FillPath(fillBrush, gp);
-
-            drawPen.Dispose();
-            fillBrush.Dispose();
+                drawPen.Dispose();
+                fillBrush.Dispose();
+            } 
         }
     }
 }
