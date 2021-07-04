@@ -30,8 +30,10 @@ namespace ITMHelper
             this.TopMost = true;
             this.Location = new Point(
                 (System.Windows.Forms.Screen.GetBounds(this).Width / 2) - (this.Width / 2),
-                System.Windows.Forms.Screen.GetBounds(this).Height - this.Height - 40 // Y offset
+                System.Windows.Forms.Screen.GetBounds(this).Height - this.Height - ((int)(System.Windows.Forms.Screen.GetBounds(this).Height * 0.037)) // Y offset
             );
+
+            Console.WriteLine(System.Windows.Forms.Screen.GetBounds(this).Height);
 
             textForm = new LyricsTextForm();
             textForm.StartPosition = FormStartPosition.Manual;
