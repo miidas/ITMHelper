@@ -12,7 +12,7 @@ namespace ITMHelper
         {
             this.BackColor = Color.Black;
             this.TransparencyKey = Color.Black;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;
             this.StartPosition = FormStartPosition.Manual;
             this.TopMost = true;
         }

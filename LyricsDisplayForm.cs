@@ -24,16 +24,14 @@ namespace ITMHelper
             this.BackColor = Color.Lime;
             this.TransparencyKey = Color.Lime;
             this.Opacity = 0.7;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;
             this.Size = new Size(400, 50);
             this.StartPosition = FormStartPosition.Manual;
             this.TopMost = true;
             this.Location = new Point(
-                (System.Windows.Forms.Screen.GetBounds(this).Width / 2) - (this.Width / 2),
-                System.Windows.Forms.Screen.GetBounds(this).Height - this.Height - ((int)(System.Windows.Forms.Screen.GetBounds(this).Height * 0.037)) // Y offset
+                (Screen.GetBounds(this).Width / 2) - (this.Width / 2),
+                Screen.GetBounds(this).Height - this.Height - ((int)(Screen.GetBounds(this).Height * 0.037)) // Y offset
             );
-
-            Console.WriteLine(System.Windows.Forms.Screen.GetBounds(this).Height);
 
             textForm = new LyricsTextForm();
             textForm.StartPosition = FormStartPosition.Manual;
