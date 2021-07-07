@@ -12,37 +12,46 @@ namespace ITMHelper
         public static string FontFamily
         {
             get { return ConfigurationManager.AppSettings["FontFamily"]; }
-            set { ConfigurationManager.AppSettings.Set("FontFamily", value); }
+            set { updateAppSetting("FontFamily", value); }
         }
 
         public static float FontSize
         {
             get { return float.Parse(ConfigurationManager.AppSettings["FontSize"]); }
-            set { ConfigurationManager.AppSettings.Set("FontSize", value.ToString()); }
+            set { updateAppSetting("FontSize", value.ToString()); }
         }
 
         public static int FontStyle
         {
             get { return int.Parse(ConfigurationManager.AppSettings["FontStyle"]); }
-            set { ConfigurationManager.AppSettings.Set("FontStyle", value.ToString()); }
+            set { updateAppSetting("FontStyle", value.ToString()); }
         }
 
         public static string FontColor
         {
             get { return ConfigurationManager.AppSettings["FontColor"]; }
-            set { ConfigurationManager.AppSettings.Set("FontColor", value); }
+            set { updateAppSetting("FontColor", value); }
         }
 
         public static string FontOutlineColor
         {
             get { return ConfigurationManager.AppSettings["FontOutlineColor"]; }
-            set { ConfigurationManager.AppSettings.Set("FontOutlineColor", value); }
+            set { updateAppSetting("FontOutlineColor", value); }
         }
 
         public static float FontOutlineWidth
         {
             get { return float.Parse(ConfigurationManager.AppSettings["FontOutlineWidth"]); }
-            set { ConfigurationManager.AppSettings.Set("FontOutlineWidth", value.ToString()); }
+            set { updateAppSetting("FontOutlineWidth", value.ToString()); }
+        }
+
+        private static void updateAppSetting(string key, string value)
+        {
+            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var settings = configFile.AppSettings.Settings;
+            settings[key].Value = value;
+            configFile.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
         }
     }
 }
