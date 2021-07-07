@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
@@ -8,6 +9,13 @@ namespace ITMHelper
 {
     class LyricsTextForm : Form
     {
+        private string FontFamily;
+        private float FontSize;
+        private int FontStyle;
+        private string FontColor;
+        private string FontOutlineColor;
+        private float FontOutlineWidth;
+
         public LyricsTextForm()
         {
             this.BackColor = Color.Black;
@@ -15,6 +23,8 @@ namespace ITMHelper
             this.FormBorderStyle = FormBorderStyle.None;
             this.StartPosition = FormStartPosition.Manual;
             this.TopMost = true;
+
+            loadConfig();
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -46,19 +56,21 @@ namespace ITMHelper
             {
                 StringFormat sf = new StringFormat();
 
-                Pen drawPen = new Pen(Color.Blue, 3.0F);
-                Brush fillBrush = new SolidBrush(Color.White);
-             
-                gp.AddString("o", new FontFamily("MS Gothic"), (int)FontStyle.Regular, e.Graphics.DpiY * 28 / 72f, new Point(0, 0), sf);
+                // Color.Blue, 3.0F
+                Pen drawPen = new Pen(ColorTranslator.FromHtml(FontOutlineColor), FontOutlineWidth);
+                Brush fillBrush = new SolidBrush(ColorTranslator.FromHtml(FontColor));
+                FontFamily fontFamily = new FontFamily(FontFamily);
+
+                gp.AddString("|", fontFamily, FontStyle, e.Graphics.DpiY * FontSize / 72f, new Point(0, 0), sf);
                 RectangleF spaceBound = gp.GetBounds();
                 gp.Reset();
 
-                gp.AddString(str, new FontFamily("MS Gothic"), (int)FontStyle.Regular, e.Graphics.DpiY * 28 / 72f, new Point(0, 0), sf);
+                gp.AddString(str, fontFamily, FontStyle, e.Graphics.DpiY * FontSize / 72f, new Point(0, 0), sf);
 
                 RectangleF rect = gp.GetBounds();
 
-                this.Width = (int) Math.Round(rect.Width + spaceBound.Width * 5.15);
-                this.Height = (int) Math.Round(rect.Height + spaceBound.Height);
+                this.Width = (int) Math.Round(rect.Width + spaceBound.Width * 15);
+                this.Height = (int) Math.Round(rect.Height + spaceBound.Height * 0.5);
 
                 var lp = new Point(
                     (Screen.GetBounds(this).Width / 2) - (this.Width / 2),
@@ -81,6 +93,16 @@ namespace ITMHelper
                 drawPen.Dispose();
                 fillBrush.Dispose();
             } 
+        }
+
+        public void loadConfig()
+        {
+            this.FontFamily = AppConfig.FontFamily;
+            this.FontSize = AppConfig.FontSize;
+            this.FontStyle = AppConfig.FontStyle;
+            this.FontColor = AppConfig.FontColor;
+            this.FontOutlineColor = AppConfig.FontOutlineColor;
+            this.FontOutlineWidth = AppConfig.FontOutlineWidth;
         }
     }
 }

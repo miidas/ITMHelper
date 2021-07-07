@@ -218,5 +218,14 @@ namespace ITMHelper
                 editForm.ShowDialog(this);
             }
         }
+
+        private void configToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new ConfigForm();
+            form.setChangeConfigCallback(() => {
+                displayForm.ReloadConfig();
+            });
+            form.ShowDialog(this);
+        }
     }
 }

@@ -103,5 +103,10 @@ namespace ITMHelper
             this.Show();
             textForm.Show();
         }
+
+        public void ReloadConfig()
+        {
+            textForm.loadConfig();
+        }
     }
 }
