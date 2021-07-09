@@ -41,6 +41,11 @@ namespace ITMHelper
             textForm.ShowInTaskbar = false;
         }
 
+        protected override bool ShowWithoutActivation
+        {
+            get { return true; }
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);

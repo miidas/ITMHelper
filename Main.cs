@@ -21,9 +21,11 @@ namespace ITMHelper
         Timer TickTimer; // for getting the player position
         Timer InfoTimer; // for getting some informations
 
-        LyricsDisplayForm displayForm;
+        //LyricsDisplayForm displayForm;
+        LayeredLyricsWindow lyricsWindow;
 
         private int prevPlayerState = -1;
+        private int playerState = -1;
 
         private long prevPlayerPosition = -1L;
         private DateTime? prevDate;
@@ -49,8 +51,10 @@ namespace ITMHelper
             InfoTimer.Tick += new EventHandler(Main_Info);
             InfoTimer.Start();
 
-            displayForm = new LyricsDisplayForm();
-            displayForm.ShowInTaskbar = false;
+            //displayForm = new LyricsDisplayForm();
+            //displayForm.ShowInTaskbar = false;
+
+            lyricsWindow = new LayeredLyricsWindow();
 
             this.ActiveControl = NowPlayingButton; // Setting the focus on NowPlaying button
 
@@ -68,8 +72,9 @@ namespace ITMHelper
             if (currentTrackObj != null)
             {
                 // Clear current displayed text
-                displayForm.currentText = "";
-                displayForm.RefreshText();
+                //displayForm.currentText = "";
+                //displayForm.RefreshText();
+                lyricsWindow.UpdateText("");
 
                 var currentTrack = (dynamic) currentTrackObj;
 
@@ -99,13 +104,14 @@ namespace ITMHelper
                             .TrimEnd('.');
                         var lrcText = System.IO.File.ReadAllText(this.lrcPath);
 
-                        displayForm.lrcFile = LrcFile.FromText(lrcText);
-                        //displayForm.ShowLyrics();
+                        var lrcFile = LrcFile.FromText(lrcText);
+                        //displayForm.lrcFile = lrcFile;
+                        lyricsWindow.SetLrcFile(lrcFile);
                     }
                     catch (Exception ex) // TODO
                     {
-                        displayForm.lrcFile = null;
-                        //displayForm.HideLyrics();
+                        //displayForm.lrcFile = null;
+                        lyricsWindow.SetLrcFile(null);
                     }
                 }
             }
@@ -147,23 +153,30 @@ namespace ITMHelper
         {
             if (playerState == 0x00) // ITPlayerStateStopped  
             {
-                displayForm.HideLyrics();
+                //displayForm.HideLyrics();
+                lyricsWindow.HideLyrics();
             }
             else if (playerState == 0x01) // ITPlayerStatePlaying
             {
-                displayForm.ShowLyrics();
+                //displayForm.ShowLyrics();
+                lyricsWindow.ShowLyrics();
             }
+            this.playerState = playerState;
         }
 
         private void Main_Tick(object sender, EventArgs e)
         {
+            if (playerState == 0x00) return; // ITPlayerStateStopped
+
             var position = (dynamic) ith.getPlayerPosition();
             if (position != null)
             {
                 if (this.prevDate.HasValue)
                 {
                     // Need to implement the step/slew mode like ntp
-                    displayForm.OnChangePlayerPosition(position - (position - prevPlayerPosition) + DateTime.Now.Subtract(this.prevDate.Value).TotalSeconds);
+                    var pos = position - (position - prevPlayerPosition) + DateTime.Now.Subtract(this.prevDate.Value).TotalSeconds;
+                    //displayForm.OnChangePlayerPosition(pos);
+                    lyricsWindow.OnChangePlayerPosition(pos);
                 }
 
                 if (position != prevPlayerPosition)
@@ -195,7 +208,8 @@ namespace ITMHelper
             }
             else
             {
-                displayForm.HideLyrics();
+                //displayForm.HideLyrics();
+                lyricsWindow.HideLyrics();
             }
         }
 
@@ -223,7 +237,8 @@ namespace ITMHelper
         {
             var form = new ConfigForm();
             form.setChangeConfigCallback(() => {
-                displayForm.ReloadConfig();
+                //displayForm.ReloadConfig();
+                lyricsWindow.LoadConfig();
             });
             form.ShowDialog(this);
         }

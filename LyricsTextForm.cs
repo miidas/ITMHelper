@@ -56,7 +56,6 @@ namespace ITMHelper
             {
                 StringFormat sf = new StringFormat();
 
-                // Color.Blue, 3.0F
                 Pen drawPen = new Pen(ColorTranslator.FromHtml(FontOutlineColor), FontOutlineWidth);
                 Brush fillBrush = new SolidBrush(ColorTranslator.FromHtml(FontColor));
                 FontFamily fontFamily = new FontFamily(FontFamily);
