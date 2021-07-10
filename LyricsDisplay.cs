@@ -81,7 +81,10 @@ namespace ITMHelper
                     this.currentLyricsWindow = new LayeredLyricsWindow(currentText);
                 }
 
-                if (this.EnableLyrics) this.currentLyricsWindow.Show();
+                if (this.EnableLyrics)
+                {
+                    this.currentLyricsWindow.Show();
+                }
 
                 if (lineLyric2 != null && !String.IsNullOrEmpty(lineLyric2.Content))
                 {

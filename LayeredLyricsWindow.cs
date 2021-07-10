@@ -17,10 +17,12 @@ namespace ITMHelper
 {
     class LayeredLyricsWindow : Form
     {
+
         public string Text;
 
         private Bitmap bitmap;
         private float gDpiY;
+        private byte alpha = 255;
 
         // Lyrics style
         private string FontFamily;
@@ -145,7 +147,7 @@ namespace ITMHelper
             Native.GDI32.BLENDFUNCTION blend = new Native.GDI32.BLENDFUNCTION();
             blend.BlendOp = 0;
             blend.BlendFlags = 0;
-            blend.SourceConstantAlpha = 255;
+            blend.SourceConstantAlpha = alpha;
             blend.AlphaFormat = 1;
 
             Point pptSrc = new Point(0, 0);
