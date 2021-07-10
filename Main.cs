@@ -76,6 +76,9 @@ namespace ITMHelper
                 //displayForm.RefreshText();
                 lyricsWindow.UpdateText("");
 
+                // Clear current player position
+                this.prevDate = null;
+
                 var currentTrack = (dynamic) currentTrackObj;
 
                 try
