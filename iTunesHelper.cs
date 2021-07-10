@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using System.ComponentModel;
 
 namespace ITMHelper
 {
@@ -20,6 +21,11 @@ namespace ITMHelper
 
             this.quitHandler = new ITEventGenericHandler(iTunesQuitEvent);
             ((dynamic)iTunesApp).OnAboutToPromptUserToQuitEvent += this.quitHandler;
+
+            /*foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(this.iTunesApp))
+            {
+                Console.WriteLine(prop.Name);
+            }*/
         }
 
         public delegate void ITEventPlayerHandler(object track);

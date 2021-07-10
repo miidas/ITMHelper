@@ -43,6 +43,12 @@ namespace ITMHelper
 
         private void Main_Load(object sender, EventArgs e)
         {
+            var lyricsDir = System.Environment.CurrentDirectory + "\\Lyrics";
+            if (!Directory.Exists(lyricsDir))
+            {
+                Directory.CreateDirectory(lyricsDir);
+            }
+
             TickTimer = new Timer();
             TickTimer.Interval = 55; // Call the event handler every 55 ms
             TickTimer.Tick += new EventHandler(Main_Tick);
@@ -104,31 +110,28 @@ namespace ITMHelper
                 }
 
                 var lyricsDir = System.Environment.CurrentDirectory + "\\Lyrics";
-                if (Directory.Exists(lyricsDir))
+                try
                 {
-                    try
-                    {
-                        // Use escaped filename instead of TrackDatabaseID for readability
-                        this.lrcPath = $"{lyricsDir}\\" 
-                            + String.Join(
-                                "_", 
-                                $"{currentTrack.Name} - {currentTrack.Artist}.lrc"
-                                .Split(System.IO.Path.GetInvalidFileNameChars(), StringSplitOptions.RemoveEmptyEntries)
-                                )
-                            .TrimEnd('.');
-                        var lrcText = System.IO.File.ReadAllText(this.lrcPath);
+                    // Use escaped filename instead of TrackDatabaseID for readability
+                    this.lrcPath = $"{lyricsDir}\\"
+                        + String.Join(
+                            "_",
+                            $"{currentTrack.Name} - {currentTrack.Artist}.lrc"
+                            .Split(System.IO.Path.GetInvalidFileNameChars(), StringSplitOptions.RemoveEmptyEntries)
+                            )
+                        .TrimEnd('.');
+                    var lrcText = System.IO.File.ReadAllText(this.lrcPath);
 
-                        var lrcFile = LrcFile.FromText(lrcText);
-                        //displayForm.lrcFile = lrcFile;
-                        //lyricsWindow.SetLrcFile(lrcFile);
-                        lyricsDisplay.SetLrcFile(lrcFile);
-                    }
-                    catch (Exception ex) // TODO
-                    {
-                        //displayForm.lrcFile = null;
-                        //lyricsWindow.SetLrcFile(null);
-                        lyricsDisplay.SetLrcFile(null);
-                    }
+                    var lrcFile = LrcFile.FromText(lrcText);
+                    //displayForm.lrcFile = lrcFile;
+                    //lyricsWindow.SetLrcFile(lrcFile);
+                    lyricsDisplay.SetLrcFile(lrcFile);
+                }
+                catch (Exception ex) // TODO
+                {
+                    //displayForm.lrcFile = null;
+                    //lyricsWindow.SetLrcFile(null);
+                    lyricsDisplay.SetLrcFile(null);
                 }
             }
             else
