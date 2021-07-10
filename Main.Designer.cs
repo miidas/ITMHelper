@@ -40,9 +40,9 @@ namespace ITMHelper
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editLrcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutITMHelperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.configToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -145,9 +145,16 @@ namespace ITMHelper
             // editLrcToolStripMenuItem
             // 
             this.editLrcToolStripMenuItem.Name = "editLrcToolStripMenuItem";
-            this.editLrcToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editLrcToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.editLrcToolStripMenuItem.Text = "Edit lrc";
             this.editLrcToolStripMenuItem.Click += new System.EventHandler(this.editLrcToolStripMenuItem_Click);
+            // 
+            // configToolStripMenuItem
+            // 
+            this.configToolStripMenuItem.Name = "configToolStripMenuItem";
+            this.configToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.configToolStripMenuItem.Text = "Config";
+            this.configToolStripMenuItem.Click += new System.EventHandler(this.configToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -163,13 +170,6 @@ namespace ITMHelper
             this.aboutITMHelperToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.aboutITMHelperToolStripMenuItem.Text = "About ITMHelper";
             this.aboutITMHelperToolStripMenuItem.Click += new System.EventHandler(this.aboutITMHelperToolStripMenuItem_Click);
-            // 
-            // configToolStripMenuItem
-            // 
-            this.configToolStripMenuItem.Name = "configToolStripMenuItem";
-            this.configToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.configToolStripMenuItem.Text = "Config";
-            this.configToolStripMenuItem.Click += new System.EventHandler(this.configToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -189,6 +189,7 @@ namespace ITMHelper
             this.MaximizeBox = false;
             this.Name = "Main";
             this.Text = "ITMHelper";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.Load += new System.EventHandler(this.Main_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

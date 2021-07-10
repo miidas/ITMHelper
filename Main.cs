@@ -22,12 +22,14 @@ namespace ITMHelper
         Timer InfoTimer; // for getting some informations
 
         //LyricsDisplayForm displayForm;
-        LayeredLyricsWindow lyricsWindow;
+        //LayeredLyricsWindow lyricsWindow;
+        LyricsDisplay lyricsDisplay;
 
         private int prevPlayerState = -1;
         private int playerState = -1;
 
         private long prevPlayerPosition = -1L;
+        private double prevPos = 0.0;
         private DateTime? prevDate;
 
         private string lrcPath = null;
@@ -54,11 +56,19 @@ namespace ITMHelper
             //displayForm = new LyricsDisplayForm();
             //displayForm.ShowInTaskbar = false;
 
-            lyricsWindow = new LayeredLyricsWindow();
+            //lyricsWindow = new LayeredLyricsWindow();
+
+            lyricsDisplay = new LyricsDisplay();
+
 
             this.ActiveControl = NowPlayingButton; // Setting the focus on NowPlaying button
 
             System.Diagnostics.Process.GetCurrentProcess().PriorityClass = System.Diagnostics.ProcessPriorityClass.RealTime; // Change app priority?
+        }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ith.Dispose();
         }
 
         public void Main_ReloadLyrics()
@@ -74,7 +84,8 @@ namespace ITMHelper
                 // Clear current displayed text
                 //displayForm.currentText = "";
                 //displayForm.RefreshText();
-                lyricsWindow.UpdateText("");
+                //lyricsWindow.UpdateText("");
+                lyricsDisplay.OnTrackChanged(currentTrackObj);
 
                 // Clear current player position
                 this.prevDate = null;
@@ -109,12 +120,14 @@ namespace ITMHelper
 
                         var lrcFile = LrcFile.FromText(lrcText);
                         //displayForm.lrcFile = lrcFile;
-                        lyricsWindow.SetLrcFile(lrcFile);
+                        //lyricsWindow.SetLrcFile(lrcFile);
+                        lyricsDisplay.SetLrcFile(lrcFile);
                     }
                     catch (Exception ex) // TODO
                     {
                         //displayForm.lrcFile = null;
-                        lyricsWindow.SetLrcFile(null);
+                        //lyricsWindow.SetLrcFile(null);
+                        lyricsDisplay.SetLrcFile(null);
                     }
                 }
             }
@@ -157,12 +170,14 @@ namespace ITMHelper
             if (playerState == 0x00) // ITPlayerStateStopped  
             {
                 //displayForm.HideLyrics();
-                lyricsWindow.HideLyrics();
+                //lyricsWindow.HideLyrics();
+                lyricsDisplay.HideLyrics();
             }
             else if (playerState == 0x01) // ITPlayerStatePlaying
             {
                 //displayForm.ShowLyrics();
-                lyricsWindow.ShowLyrics();
+                //lyricsWindow.ShowLyrics();
+                lyricsDisplay.ShowLyrics();
             }
             this.playerState = playerState;
         }
@@ -178,8 +193,18 @@ namespace ITMHelper
                 {
                     // Need to implement the step/slew mode like ntp
                     var pos = position - (position - prevPlayerPosition) + DateTime.Now.Subtract(this.prevDate.Value).TotalSeconds;
+                    if (pos < prevPos)
+                    {
+                        Console.WriteLine($"Wooosh! PS:{prevPos}, CP:{position}");
+                    }
+                    else
+                    {
+                        lyricsDisplay.OnChangePlayerPosition(pos);
+                    }
+                    prevPos = position;
                     //displayForm.OnChangePlayerPosition(pos);
-                    lyricsWindow.OnChangePlayerPosition(pos);
+                    //lyricsWindow.OnChangePlayerPosition(pos);
+                    //lyricsDisplay.OnChangePlayerPosition(pos);
                 }
 
                 if (position != prevPlayerPosition)
@@ -190,7 +215,9 @@ namespace ITMHelper
                     }
                     else
                     {
+                        this.prevPos = 0;
                         this.prevDate = null;
+                        lyricsDisplay.OnChangePlayerPositionByUser();
                     }
                     prevPlayerPosition = position;
                 }
@@ -212,13 +239,9 @@ namespace ITMHelper
             else
             {
                 //displayForm.HideLyrics();
-                lyricsWindow.HideLyrics();
+                //lyricsWindow.HideLyrics();
+                lyricsDisplay.HideLyrics();
             }
-        }
-
-        private void DelayTextBox_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void aboutITMHelperToolStripMenuItem_Click(object sender, EventArgs e)
@@ -241,7 +264,7 @@ namespace ITMHelper
             var form = new ConfigForm();
             form.setChangeConfigCallback(() => {
                 //displayForm.ReloadConfig();
-                lyricsWindow.LoadConfig();
+                //lyricsWindow.LoadConfig();
             });
             form.ShowDialog(this);
         }

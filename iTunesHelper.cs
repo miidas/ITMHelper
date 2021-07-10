@@ -7,14 +7,29 @@ using System.Runtime.InteropServices;
 
 namespace ITMHelper
 {
-    class iTunesHelper
+    class iTunesHelper:IDisposable
     {
         object iTunesApp;
+
+        object quitHandler;
 
         public iTunesHelper()
         {
             Type iTunesType = Type.GetTypeFromProgID("iTunes.Application");
             this.iTunesApp = Activator.CreateInstance(iTunesType);
+
+            this.quitHandler = new ITEventGenericHandler(iTunesQuitEvent);
+            ((dynamic)iTunesApp).OnAboutToPromptUserToQuitEvent += this.quitHandler;
+        }
+
+        public delegate void ITEventPlayerHandler(object track);
+        public delegate void ITEventGenericHandler();
+
+        private void iTunesQuitEvent()
+        {
+            ((dynamic)iTunesApp).OnAboutToPromptUserToQuitEvent -= this.quitHandler;
+            // TODO: Call handler instead of exiting app
+            System.Windows.Forms.Application.Exit();
         }
 
         public object getCurrentTrack()
@@ -54,6 +69,13 @@ namespace ITMHelper
         public object getVersion()
         {
             return ((dynamic)iTunesApp).Version;
+        }
+
+        public void Dispose()
+        {
+            // Release the COM object
+            Marshal.ReleaseComObject(this.iTunesApp);
+            this.iTunesApp = null;
         }
     }
 }

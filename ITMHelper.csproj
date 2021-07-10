@@ -61,6 +61,7 @@
     <Compile Include="LayeredLyricsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="LyricsDisplay.cs" />
     <Compile Include="LyricsDisplayForm.cs">
       <SubType>Form</SubType>
     </Compile>

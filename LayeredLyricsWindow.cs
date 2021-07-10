@@ -17,11 +17,12 @@ namespace ITMHelper
 {
     class LayeredLyricsWindow : Form
     {
+        public string Text;
+
         private Bitmap bitmap;
-        private string text = "";
-        private ILrcFile lrcFile = null;
         private float gDpiY;
 
+        // Lyrics style
         private string FontFamily;
         private float FontSize;
         private int FontStyle;
@@ -29,8 +30,9 @@ namespace ITMHelper
         private string FontOutlineColor;
         private float FontOutlineWidth;
 
-        public LayeredLyricsWindow()
+        public LayeredLyricsWindow(string str)
         {
+            this.Text = str;
             this.FormBorderStyle = FormBorderStyle.None;
             this.StartPosition = FormStartPosition.Manual;
             this.Size = new Size(136, 50);
@@ -45,7 +47,8 @@ namespace ITMHelper
                 this.gDpiY = g.DpiY;
             }
 
-            LoadConfig();
+            this.LoadConfig();
+            this.PerformDraw();
         }
 
         protected override CreateParams CreateParams
@@ -68,77 +71,7 @@ namespace ITMHelper
             get { return true; }
         }
 
-        private bool EnableLyrics = true;
-
-        public void HideLyrics()
-        {
-            this.EnableLyrics = false;
-            UpdateText(""); // Force update
-        }
-
-        public void ShowLyrics()
-        {
-            this.EnableLyrics = true;
-            UpdateText(this.text); // Force update
-        }
-
-        public void LoadConfig()
-        {
-            this.FontFamily = AppConfig.FontFamily;
-            this.FontSize = AppConfig.FontSize;
-            this.FontStyle = AppConfig.FontStyle;
-            this.FontColor = AppConfig.FontColor;
-            this.FontOutlineColor = AppConfig.FontOutlineColor;
-            this.FontOutlineWidth = AppConfig.FontOutlineWidth;
-        }
-
-        public void UpdateText(string text)
-        {
-            this.text = text;
-
-            var hideFlag = false;
-            if (String.IsNullOrEmpty(text) || !this.EnableLyrics)
-            {
-                this.Hide();
-                hideFlag = true;
-            }
-
-            PerformDraw(text);
-
-            if (!hideFlag && !this.Visible) this.Show();
-        }
-
-        public void SetLrcFile(ILrcFile lrcFile)
-        {
-            this.lrcFile = lrcFile;
-        }
-
-        public void OnChangePlayerPosition(double position)
-        {
-            if (lrcFile == null) return;
-
-            // Check if the mouse pointer is in the Window
-            if (this.ClientRectangle.Contains(PointToClient(Control.MousePosition)))
-            {
-                this.Hide();
-                return;
-            }
-
-            position += 1.0f; // TODO
-
-            var lineLyric = lrcFile.BeforeOrAt(TimeSpan.FromSeconds(position));
-
-            if (lineLyric == null || lineLyric.Content == null)
-            {
-                UpdateText("");
-            }
-            else if (!String.Equals(lineLyric.Content, this.text) || !this.Visible)
-            {
-                UpdateText(lineLyric.Content);
-            }
-        }
-
-        private void PerformDraw(string str)
+        private void PerformDraw()
         {
             // Draw lyrics
             using (GraphicsPath gp = new GraphicsPath())
@@ -154,7 +87,7 @@ namespace ITMHelper
                 RectangleF spaceBound = gp.GetBounds();
                 gp.Reset();
 
-                gp.AddString(str, fontFamily, FontStyle, this.gDpiY * FontSize / 72f, new Point(0, 0), sf);
+                gp.AddString(this.Text, fontFamily, FontStyle, this.gDpiY * FontSize / 72f, new Point(0, 0), sf);
 
                 RectangleF rect = gp.GetBounds();
 
@@ -232,6 +165,16 @@ namespace ITMHelper
             gBitmap.ReleaseHdc(bitmapHdc);
             gBitmap.Dispose();
             bitmap.Dispose();
+        }
+
+        public void LoadConfig()
+        {
+            this.FontFamily = AppConfig.FontFamily;
+            this.FontSize = AppConfig.FontSize;
+            this.FontStyle = AppConfig.FontStyle;
+            this.FontColor = AppConfig.FontColor;
+            this.FontOutlineColor = AppConfig.FontOutlineColor;
+            this.FontOutlineWidth = AppConfig.FontOutlineWidth;
         }
     }
 }
