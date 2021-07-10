@@ -15,8 +15,9 @@ namespace ITMHelper
         private LayeredLyricsWindow currentLyricsWindow = null;
         private LayeredLyricsWindow nextLyricsWindow = null;
 
+        private string currentText = null;
+
         private bool EnableLyrics = true;
-        private bool ForceUpdate = false;
 
         public void OnChangePlayerPosition(double position)
         {
@@ -25,52 +26,67 @@ namespace ITMHelper
             // Check if the mouse pointer is in the Window
             if (this.currentLyricsWindow != null)
             {
-                if (this.currentLyricsWindow.ClientRectangle.Contains(currentLyricsWindow.PointToClient(Control.MousePosition)) || !this.EnableLyrics)
+                if (this.EnableLyrics)
+                {
+                    if (this.currentLyricsWindow.ClientRectangle.Contains(currentLyricsWindow.PointToClient(Control.MousePosition)))
+                    {
+                        this.currentLyricsWindow.Hide();
+                        return;
+                    }
+                    if (!this.currentLyricsWindow.Visible)
+                    {
+                        this.currentLyricsWindow.Show();
+                    }
+                }
+                else
                 {
                     this.currentLyricsWindow.Hide();
-                    return;
-                }
-                else if (this.EnableLyrics && !this.currentLyricsWindow.Visible)
-                {
-                    this.currentLyricsWindow.Show();
                 }
             }
 
             position += 1.0f; // TODO: Configure the time offset of lrc from settings 
 
             IOneLineLyric lineLyric = lrcFile.BeforeOrAt(TimeSpan.FromSeconds(position));
-            IOneLineLyric lineLyric2 = null;
 
-            if (lineLyric != null)
+            if (lineLyric == null) return;
+
+            IOneLineLyric lineLyric2 = lrcFile.After(lineLyric.Timestamp);
+
+            if (this.currentLyricsWindow != null)
             {
-                lineLyric2 = lrcFile.BeforeOrAt(lineLyric.Timestamp);
+                if (String.Equals(lineLyric.Content, this.currentText)) return;
+                this.currentLyricsWindow.Hide();
+                this.currentLyricsWindow = null;
             }
 
-            if (lineLyric == null || String.IsNullOrEmpty(lineLyric.Content))
+            this.currentText = lineLyric.Content;
+
+            if (String.IsNullOrEmpty(lineLyric.Content))
             {
-                if (this.currentLyricsWindow != null)
+                if (this.nextLyricsWindow == null && 
+                    lineLyric2 != null && !String.IsNullOrEmpty(lineLyric2.Content))
                 {
-                    this.currentLyricsWindow.Dispose();
-                    this.currentLyricsWindow = null;
+                    this.nextLyricsWindow = new LayeredLyricsWindow(lineLyric2.Content);
                 }
             }
-            else if (this.currentLyricsWindow == null || !String.Equals(lineLyric.Content, this.currentLyricsWindow.Text) || this.ForceUpdate)
+            else
             {
-                if (this.currentLyricsWindow != null)
+                if (this.nextLyricsWindow != null)
                 {
-                    this.currentLyricsWindow.Hide();
+                    this.currentLyricsWindow = this.nextLyricsWindow;
+                    this.nextLyricsWindow = null;
                 }
-                this.currentLyricsWindow = this.nextLyricsWindow;
+                else
+                {
+                    this.currentLyricsWindow = new LayeredLyricsWindow(currentText);
+                }
 
-                if (this.currentLyricsWindow == null) this.currentLyricsWindow = new LayeredLyricsWindow(lineLyric.Content);
-                this.currentLyricsWindow.Show();
+                if (this.EnableLyrics) this.currentLyricsWindow.Show();
 
                 if (lineLyric2 != null && !String.IsNullOrEmpty(lineLyric2.Content))
                 {
                     this.nextLyricsWindow = new LayeredLyricsWindow(lineLyric2.Content);
                 }
-
-                this.ForceUpdate = false;
             }
         }
 
@@ -83,7 +99,6 @@ namespace ITMHelper
         public void ShowLyrics()
         {
             this.EnableLyrics = true;
-            this.ForceUpdate = true;
         }
 
         public void SetLrcFile(ILrcFile lrcFile)
@@ -93,14 +108,23 @@ namespace ITMHelper
 
         public void OnTrackChanged(object track)
         {
-            if (this.currentLyricsWindow != null) this.currentLyricsWindow.Hide();
-            this.nextLyricsWindow = null;
+            this.ClearLyrics();
         }
 
         public void OnChangePlayerPositionByUser()
         {
-            if (this.currentLyricsWindow != null) this.currentLyricsWindow.Hide();
+            this.ClearLyrics();
+        }
+
+        private void ClearLyrics()
+        {
+            if (this.currentLyricsWindow != null)
+            {
+                this.currentLyricsWindow.Hide();
+                this.currentLyricsWindow = null;
+            }
             this.nextLyricsWindow = null;
+            this.currentText = null;
         }
     }
 }
