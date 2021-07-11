@@ -42,6 +42,8 @@ namespace ITMHelper
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.displayXPos = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.displayIndex = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.fontColorPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineColorPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineWidth)).BeginInit();
@@ -49,6 +51,7 @@ namespace ITMHelper
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.displayYPos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.displayXPos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.displayIndex)).BeginInit();
             this.SuspendLayout();
             // 
             // fontColorPic
@@ -137,7 +140,9 @@ namespace ITMHelper
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.displayIndex);
             this.groupBox2.Controls.Add(this.displayYPos);
+            this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.displayXPos);
@@ -156,7 +161,7 @@ namespace ITMHelper
             0,
             0,
             196608});
-            this.displayYPos.Location = new System.Drawing.Point(103, 19);
+            this.displayYPos.Location = new System.Drawing.Point(194, 19);
             this.displayYPos.Maximum = new decimal(new int[] {
             1,
             0,
@@ -169,7 +174,7 @@ namespace ITMHelper
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(83, 21);
+            this.label5.Location = new System.Drawing.Point(174, 21);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(14, 13);
             this.label5.TabIndex = 11;
@@ -178,7 +183,7 @@ namespace ITMHelper
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 21);
+            this.label4.Location = new System.Drawing.Point(97, 21);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(14, 13);
             this.label4.TabIndex = 10;
@@ -192,7 +197,7 @@ namespace ITMHelper
             0,
             0,
             196608});
-            this.displayXPos.Location = new System.Drawing.Point(26, 19);
+            this.displayXPos.Location = new System.Drawing.Point(117, 19);
             this.displayXPos.Maximum = new decimal(new int[] {
             1,
             0,
@@ -202,11 +207,27 @@ namespace ITMHelper
             this.displayXPos.Size = new System.Drawing.Size(51, 20);
             this.displayXPos.TabIndex = 0;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 21);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(41, 13);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Display";
+            // 
+            // displayIndex
+            // 
+            this.displayIndex.Location = new System.Drawing.Point(47, 19);
+            this.displayIndex.Name = "displayIndex";
+            this.displayIndex.Size = new System.Drawing.Size(39, 20);
+            this.displayIndex.TabIndex = 13;
+            // 
             // ConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(329, 157);
+            this.ClientSize = new System.Drawing.Size(329, 156);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -223,6 +244,7 @@ namespace ITMHelper
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.displayYPos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.displayXPos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.displayIndex)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -242,5 +264,7 @@ namespace ITMHelper
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown displayXPos;
+        private System.Windows.Forms.NumericUpDown displayIndex;
+        private System.Windows.Forms.Label label6;
     }
 }

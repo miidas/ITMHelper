@@ -249,7 +249,10 @@ namespace ITMHelper
         {
             lyricsDisplay.HideLyrics();
             var form = new ConfigForm();
-            form.FormClosed += (cs, ce) => lyricsDisplay.ShowLyrics();
+            form.FormClosed += (cs, ce) => {
+                lyricsDisplay.ClearLyrics(); // Clear cache
+                lyricsDisplay.ShowLyrics();
+            };
             form.ShowDialog(this);
         }
     }

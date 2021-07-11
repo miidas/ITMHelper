@@ -45,6 +45,12 @@ namespace ITMHelper
             set { updateAppSetting("FontOutlineWidth", value.ToString("F1")); }
         }
 
+        public static int DisplayIndex
+        {
+            get { return int.Parse(ConfigurationManager.AppSettings["DisplayIndex"]); }
+            set { updateAppSetting("DisplayIndex", value.ToString()); }
+        }
+
         public static float DisplayPositionX
         {
             get { return float.Parse(ConfigurationManager.AppSettings["DisplayPositionX"]); }

@@ -33,6 +33,7 @@ namespace ITMHelper
         private float FontOutlineWidth;
 
         // Display position
+        private int DisplayIndex;
         private float DisplayPositionX;
         private float DisplayPositionY;
 
@@ -101,9 +102,11 @@ namespace ITMHelper
                 this.Width = (int) Math.Round(rect.Width + spaceBound.Width * 15);
                 this.Height = (int) Math.Round(spaceBound.Height * 1.5);
 
+                var bounds = Screen.AllScreens[this.DisplayIndex].Bounds;
+
                 var lp = new Point(
-                    (int)(Screen.GetBounds(this).Width * this.DisplayPositionX) - (this.Width / 2),
-                    (int)(Screen.GetBounds(this).Height * this.DisplayPositionY)
+                    (int) (bounds.Left + (Screen.GetBounds(this).Width * this.DisplayPositionX) - (this.Width / 2)),
+                    (int) (bounds.Top + Screen.GetBounds(this).Height * this.DisplayPositionY)
                 );
 
                 this.Location = lp;
@@ -182,6 +185,7 @@ namespace ITMHelper
             this.FontColor = AppConfig.FontColor;
             this.FontOutlineColor = AppConfig.FontOutlineColor;
             this.FontOutlineWidth = AppConfig.FontOutlineWidth;
+            this.DisplayIndex = AppConfig.DisplayIndex;
             this.DisplayPositionX = AppConfig.DisplayPositionX;
             this.DisplayPositionY = AppConfig.DisplayPositionY;
         }

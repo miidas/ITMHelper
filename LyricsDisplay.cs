@@ -119,7 +119,7 @@ namespace ITMHelper
             this.ClearLyrics();
         }
 
-        private void ClearLyrics()
+        public void ClearLyrics()
         {
             if (this.currentLyricsWindow != null)
             {

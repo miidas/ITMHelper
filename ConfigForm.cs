@@ -25,7 +25,10 @@ namespace ITMHelper
             fontOutlineColorPic.BackColor = ColorTranslator.FromHtml(AppConfig.FontOutlineColor);
             fontOutlineWidth.Value = (decimal) AppConfig.FontOutlineWidth;
             fontOutlineWidth.ValueChanged += fontOutlineWidth_ValueChanged;
-            displayXPos.Value = (decimal)AppConfig.DisplayPositionX;
+            displayIndex.Value = AppConfig.DisplayIndex;
+            displayIndex.Maximum = Screen.AllScreens.Length - 1;
+            displayIndex.ValueChanged += displayIndex_ValueChanged;
+            displayXPos.Value = (decimal) AppConfig.DisplayPositionX;
             displayXPos.ValueChanged += displayXPos_ValueChanged;
             displayYPos.Value = (decimal) AppConfig.DisplayPositionY;
             displayYPos.ValueChanged += displayYPos_ValueChanged;
@@ -84,11 +87,18 @@ namespace ITMHelper
             this.previewLyricsWindow.Redraw();
         }
 
+        private void displayIndex_ValueChanged(object sender, EventArgs e)
+        {
+            AppConfig.DisplayIndex = (int) displayIndex.Value;
+            this.previewLyricsWindow.Redraw();
+        }
+
         private void displayXPos_ValueChanged(object sender, EventArgs e)
         {
             AppConfig.DisplayPositionX = (float) displayXPos.Value;
             this.previewLyricsWindow.Redraw();
         }
+
         private void displayYPos_ValueChanged(object sender, EventArgs e)
         {
             AppConfig.DisplayPositionY = (float) displayYPos.Value;
