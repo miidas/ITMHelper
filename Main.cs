@@ -21,8 +21,6 @@ namespace ITMHelper
         Timer TickTimer; // for getting the player position
         Timer InfoTimer; // for getting some informations
 
-        //LyricsDisplayForm displayForm;
-        //LayeredLyricsWindow lyricsWindow;
         LyricsDisplay lyricsDisplay;
 
         private int prevPlayerState = -1;
@@ -59,13 +57,7 @@ namespace ITMHelper
             InfoTimer.Tick += new EventHandler(Main_Info);
             InfoTimer.Start();
 
-            //displayForm = new LyricsDisplayForm();
-            //displayForm.ShowInTaskbar = false;
-
-            //lyricsWindow = new LayeredLyricsWindow();
-
             lyricsDisplay = new LyricsDisplay();
-
 
             this.ActiveControl = NowPlayingButton; // Setting the focus on NowPlaying button
 
@@ -88,9 +80,6 @@ namespace ITMHelper
             if (currentTrackObj != null)
             {
                 // Clear current displayed text
-                //displayForm.currentText = "";
-                //displayForm.RefreshText();
-                //lyricsWindow.UpdateText("");
                 lyricsDisplay.OnTrackChanged(currentTrackObj);
 
                 // Clear current player position
@@ -123,14 +112,10 @@ namespace ITMHelper
                     var lrcText = System.IO.File.ReadAllText(this.lrcPath);
 
                     var lrcFile = LrcFile.FromText(lrcText);
-                    //displayForm.lrcFile = lrcFile;
-                    //lyricsWindow.SetLrcFile(lrcFile);
                     lyricsDisplay.SetLrcFile(lrcFile);
                 }
                 catch (Exception ex) // TODO
                 {
-                    //displayForm.lrcFile = null;
-                    //lyricsWindow.SetLrcFile(null);
                     lyricsDisplay.SetLrcFile(null);
                 }
             }
@@ -179,14 +164,10 @@ namespace ITMHelper
         {
             if (playerState == 0x00) // ITPlayerStateStopped  
             {
-                //displayForm.HideLyrics();
-                //lyricsWindow.HideLyrics();
                 lyricsDisplay.HideLyrics();
             }
             else if (playerState == 0x01) // ITPlayerStatePlaying
             {
-                //displayForm.ShowLyrics();
-                //lyricsWindow.ShowLyrics();
                 lyricsDisplay.ShowLyrics();
             }
             this.playerState = playerState;
@@ -212,9 +193,6 @@ namespace ITMHelper
                         lyricsDisplay.OnChangePlayerPosition(pos);
                     }
                     prevPos = position;
-                    //displayForm.OnChangePlayerPosition(pos);
-                    //lyricsWindow.OnChangePlayerPosition(pos);
-                    //lyricsDisplay.OnChangePlayerPosition(pos);
                 }
 
                 if (position != prevPlayerPosition)
@@ -248,8 +226,6 @@ namespace ITMHelper
             }
             else
             {
-                //displayForm.HideLyrics();
-                //lyricsWindow.HideLyrics();
                 lyricsDisplay.HideLyrics();
             }
         }
@@ -272,10 +248,6 @@ namespace ITMHelper
         private void configToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = new ConfigForm();
-            form.setChangeConfigCallback(() => {
-                //displayForm.ReloadConfig();
-                //lyricsWindow.LoadConfig();
-            });
             form.ShowDialog(this);
         }
     }
