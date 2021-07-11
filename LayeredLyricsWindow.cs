@@ -18,7 +18,7 @@ namespace ITMHelper
     class LayeredLyricsWindow : Form
     {
 
-        public string Text;
+        public string lyricsText;
 
         private Bitmap bitmap;
         private float gDpiY;
@@ -32,16 +32,15 @@ namespace ITMHelper
         private string FontOutlineColor;
         private float FontOutlineWidth;
 
+        // Display position
+        private float DisplayPositionX;
+        private float DisplayPositionY;
+
         public LayeredLyricsWindow(string str)
         {
-            this.Text = str;
+            this.lyricsText = str;
             this.FormBorderStyle = FormBorderStyle.None;
             this.StartPosition = FormStartPosition.Manual;
-            this.Size = new Size(136, 50);
-            this.Location = new Point(
-                (Screen.GetBounds(this).Width / 2) - (this.Width / 2),
-                Screen.GetBounds(this).Height - this.Height - ((int)(Screen.GetBounds(this).Height * 0.037)) // Y offset
-            );
 
             // Get DpiY
             using (Graphics g = this.CreateGraphics())
@@ -49,6 +48,12 @@ namespace ITMHelper
                 this.gDpiY = g.DpiY;
             }
 
+            this.LoadConfig();
+            this.PerformDraw();
+        }
+
+        public void Redraw()
+        {
             this.LoadConfig();
             this.PerformDraw();
         }
@@ -89,7 +94,7 @@ namespace ITMHelper
                 RectangleF spaceBound = gp.GetBounds();
                 gp.Reset();
 
-                gp.AddString(this.Text, fontFamily, FontStyle, this.gDpiY * FontSize / 72f, new Point(0, 0), sf);
+                gp.AddString(this.lyricsText, fontFamily, FontStyle, this.gDpiY * FontSize / 72f, new Point(0, 0), sf);
 
                 RectangleF rect = gp.GetBounds();
 
@@ -97,8 +102,8 @@ namespace ITMHelper
                 this.Height = (int) Math.Round(spaceBound.Height * 1.5);
 
                 var lp = new Point(
-                    (Screen.GetBounds(this).Width / 2) - (this.Width / 2),
-                    this.Location.Y
+                    (int)(Screen.GetBounds(this).Width * this.DisplayPositionX) - (this.Width / 2),
+                    (int)(Screen.GetBounds(this).Height * this.DisplayPositionY)
                 );
 
                 this.Location = lp;
@@ -177,6 +182,8 @@ namespace ITMHelper
             this.FontColor = AppConfig.FontColor;
             this.FontOutlineColor = AppConfig.FontOutlineColor;
             this.FontOutlineWidth = AppConfig.FontOutlineWidth;
+            this.DisplayPositionX = AppConfig.DisplayPositionX;
+            this.DisplayPositionY = AppConfig.DisplayPositionY;
         }
     }
 }

@@ -42,7 +42,18 @@ namespace ITMHelper
         public static float FontOutlineWidth
         {
             get { return float.Parse(ConfigurationManager.AppSettings["FontOutlineWidth"]); }
-            set { updateAppSetting("FontOutlineWidth", value.ToString()); }
+            set { updateAppSetting("FontOutlineWidth", value.ToString("F1")); }
+        }
+
+        public static float DisplayPositionX
+        {
+            get { return float.Parse(ConfigurationManager.AppSettings["DisplayPositionX"]); }
+            set { updateAppSetting("DisplayPositionX", value.ToString("F3")); }
+        }
+        public static float DisplayPositionY
+        {
+            get { return float.Parse(ConfigurationManager.AppSettings["DisplayPositionY"]); }
+            set { updateAppSetting("DisplayPositionY", value.ToString("F3")); }
         }
 
         private static void updateAppSetting(string key, string value)

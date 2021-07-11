@@ -12,6 +12,7 @@ namespace ITMHelper
 {
     public partial class ConfigForm : Form
     {
+        private LayeredLyricsWindow previewLyricsWindow = null;
 
         public ConfigForm()
         {
@@ -22,8 +23,15 @@ namespace ITMHelper
         {
             fontColorPic.BackColor = ColorTranslator.FromHtml(AppConfig.FontColor);
             fontOutlineColorPic.BackColor = ColorTranslator.FromHtml(AppConfig.FontOutlineColor);
-            fontOutlineWidth.Value = (decimal)AppConfig.FontOutlineWidth;
+            fontOutlineWidth.Value = (decimal) AppConfig.FontOutlineWidth;
             fontOutlineWidth.ValueChanged += fontOutlineWidth_ValueChanged;
+            displayXPos.Value = (decimal)AppConfig.DisplayPositionX;
+            displayXPos.ValueChanged += displayXPos_ValueChanged;
+            displayYPos.Value = (decimal) AppConfig.DisplayPositionY;
+            displayYPos.ValueChanged += displayYPos_ValueChanged;
+
+            this.previewLyricsWindow = new LayeredLyricsWindow("サンプルテキストです");
+            this.previewLyricsWindow.Show();
         }
 
         private void fontColorPic_Click(object sender, EventArgs e)
@@ -51,6 +59,7 @@ namespace ITMHelper
             {
                 fontOutlineColorPic.BackColor = dialog.Color;
                 AppConfig.FontOutlineColor = ColorTranslator.ToHtml(dialog.Color);
+                this.previewLyricsWindow.Redraw();
             }
         }
 
@@ -65,12 +74,30 @@ namespace ITMHelper
                 AppConfig.FontFamily = dialog.Font.FontFamily.Name;
                 AppConfig.FontSize = dialog.Font.Size;
                 AppConfig.FontStyle = (int) dialog.Font.Style;
+                this.previewLyricsWindow.Redraw();
             }
         }
 
         private void fontOutlineWidth_ValueChanged(object sender, EventArgs e)
         {
-            AppConfig.FontOutlineWidth = (int)fontOutlineWidth.Value;
+            AppConfig.FontOutlineWidth = (float) fontOutlineWidth.Value;
+            this.previewLyricsWindow.Redraw();
+        }
+
+        private void displayXPos_ValueChanged(object sender, EventArgs e)
+        {
+            AppConfig.DisplayPositionX = (float) displayXPos.Value;
+            this.previewLyricsWindow.Redraw();
+        }
+        private void displayYPos_ValueChanged(object sender, EventArgs e)
+        {
+            AppConfig.DisplayPositionY = (float) displayYPos.Value;
+            this.previewLyricsWindow.Redraw();
+        }
+
+        private void ConfigForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.previewLyricsWindow.Dispose();
         }
     }
 }

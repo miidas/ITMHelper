@@ -36,14 +36,24 @@ namespace ITMHelper
             this.fontSelectButton = new System.Windows.Forms.Button();
             this.fontOutlineWidth = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.displayYPos = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.displayXPos = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.fontColorPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineColorPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineWidth)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.displayYPos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.displayXPos)).BeginInit();
             this.SuspendLayout();
             // 
             // fontColorPic
             // 
-            this.fontColorPic.Location = new System.Drawing.Point(12, 25);
+            this.fontColorPic.Location = new System.Drawing.Point(6, 36);
             this.fontColorPic.Name = "fontColorPic";
             this.fontColorPic.Size = new System.Drawing.Size(25, 25);
             this.fontColorPic.TabIndex = 0;
@@ -53,24 +63,24 @@ namespace ITMHelper
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 9);
+            this.label1.Location = new System.Drawing.Point(3, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.Size = new System.Drawing.Size(31, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Font Color";
+            this.label1.Text = "Color";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(70, 9);
+            this.label2.Location = new System.Drawing.Point(44, 20);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 13);
+            this.label2.Size = new System.Drawing.Size(67, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Font Outline Color";
+            this.label2.Text = "Outline Color";
             // 
             // fontOutlineColorPic
             // 
-            this.fontOutlineColorPic.Location = new System.Drawing.Point(73, 25);
+            this.fontOutlineColorPic.Location = new System.Drawing.Point(47, 36);
             this.fontOutlineColorPic.Name = "fontOutlineColorPic";
             this.fontOutlineColorPic.Size = new System.Drawing.Size(25, 25);
             this.fontOutlineColorPic.TabIndex = 3;
@@ -79,7 +89,7 @@ namespace ITMHelper
             // 
             // fontSelectButton
             // 
-            this.fontSelectButton.Location = new System.Drawing.Point(280, 25);
+            this.fontSelectButton.Location = new System.Drawing.Point(202, 36);
             this.fontSelectButton.Name = "fontSelectButton";
             this.fontSelectButton.Size = new System.Drawing.Size(86, 23);
             this.fontSelectButton.TabIndex = 4;
@@ -95,7 +105,7 @@ namespace ITMHelper
             0,
             0,
             65536});
-            this.fontOutlineWidth.Location = new System.Drawing.Point(170, 27);
+            this.fontOutlineWidth.Location = new System.Drawing.Point(120, 38);
             this.fontOutlineWidth.Name = "fontOutlineWidth";
             this.fontOutlineWidth.Size = new System.Drawing.Size(45, 20);
             this.fontOutlineWidth.TabIndex = 5;
@@ -103,32 +113,117 @@ namespace ITMHelper
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(167, 9);
+            this.label3.Location = new System.Drawing.Point(117, 20);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(95, 13);
+            this.label3.Size = new System.Drawing.Size(71, 13);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Font Outline Width";
+            this.label3.Text = "Outline Width";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.fontColorPic);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.fontOutlineWidth);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.fontSelectButton);
+            this.groupBox1.Controls.Add(this.fontOutlineColorPic);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(303, 75);
+            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Font";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.displayYPos);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.displayXPos);
+            this.groupBox2.Location = new System.Drawing.Point(12, 93);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(303, 50);
+            this.groupBox2.TabIndex = 8;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Position";
+            // 
+            // displayYPos
+            // 
+            this.displayYPos.DecimalPlaces = 3;
+            this.displayYPos.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.displayYPos.Location = new System.Drawing.Point(103, 19);
+            this.displayYPos.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.displayYPos.Name = "displayYPos";
+            this.displayYPos.Size = new System.Drawing.Size(51, 20);
+            this.displayYPos.TabIndex = 9;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(83, 21);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(14, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Y";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 21);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(14, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "X";
+            // 
+            // displayXPos
+            // 
+            this.displayXPos.DecimalPlaces = 3;
+            this.displayXPos.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.displayXPos.Location = new System.Drawing.Point(26, 19);
+            this.displayXPos.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.displayXPos.Name = "displayXPos";
+            this.displayXPos.Size = new System.Drawing.Size(51, 20);
+            this.displayXPos.TabIndex = 0;
             // 
             // ConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(376, 68);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.fontOutlineWidth);
-            this.Controls.Add(this.fontSelectButton);
-            this.Controls.Add(this.fontOutlineColorPic);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.fontColorPic);
+            this.ClientSize = new System.Drawing.Size(329, 157);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ConfigForm";
             this.Text = "Config";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ConfigForm_FormClosed);
             this.Load += new System.EventHandler(this.ConfigForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.fontColorPic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineColorPic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineWidth)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.displayYPos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.displayXPos)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -141,5 +236,11 @@ namespace ITMHelper
         private System.Windows.Forms.Button fontSelectButton;
         private System.Windows.Forms.NumericUpDown fontOutlineWidth;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.NumericUpDown displayYPos;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown displayXPos;
     }
 }

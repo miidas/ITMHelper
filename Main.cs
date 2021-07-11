@@ -247,7 +247,9 @@ namespace ITMHelper
 
         private void configToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            lyricsDisplay.HideLyrics();
             var form = new ConfigForm();
+            form.FormClosed += (cs, ce) => lyricsDisplay.ShowLyrics();
             form.ShowDialog(this);
         }
     }
