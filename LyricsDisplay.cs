@@ -10,6 +10,8 @@ namespace ITMHelper
 {
     class LyricsDisplay
     {
+        private float LyricsTimeOffset;
+
         private ILrcFile lrcFile = null;
 
         private LayeredLyricsWindow currentLyricsWindow = null;
@@ -18,6 +20,16 @@ namespace ITMHelper
         private string currentText = null;
 
         private bool EnableLyrics = true;
+
+        public LyricsDisplay()
+        {
+            this.LoadConfig();
+        }
+
+        public void LoadConfig()
+        {
+            this.LyricsTimeOffset = AppConfig.LyricsTimeOffset;
+        }
 
         public void OnChangePlayerPosition(double position)
         {
@@ -44,7 +56,7 @@ namespace ITMHelper
                 }
             }
 
-            position += 1.0f; // TODO: Configure the time offset of lrc from settings 
+            position += 1.0f - LyricsTimeOffset;
 
             IOneLineLyric lineLyric = lrcFile.BeforeOrAt(TimeSpan.FromSeconds(position));
 

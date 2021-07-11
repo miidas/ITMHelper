@@ -14,24 +14,30 @@ namespace ITMHelper
     {
         private LayeredLyricsWindow previewLyricsWindow = null;
 
+        private onChangeTimeOffsetConfig onChangeTimeOffsetConfigCallback;
+
         public ConfigForm()
         {
             InitializeComponent();
         }
 
+        public delegate void onChangeTimeOffsetConfig();
+
         private void ConfigForm_Load(object sender, EventArgs e)
         {
             fontColorPic.BackColor = ColorTranslator.FromHtml(AppConfig.FontColor);
             fontOutlineColorPic.BackColor = ColorTranslator.FromHtml(AppConfig.FontOutlineColor);
-            fontOutlineWidth.Value = (decimal) AppConfig.FontOutlineWidth;
+            fontOutlineWidth.Value = (decimal)AppConfig.FontOutlineWidth;
             fontOutlineWidth.ValueChanged += fontOutlineWidth_ValueChanged;
             displayIndex.Value = AppConfig.DisplayIndex;
             displayIndex.Maximum = Screen.AllScreens.Length - 1;
             displayIndex.ValueChanged += displayIndex_ValueChanged;
-            displayXPos.Value = (decimal) AppConfig.DisplayPositionX;
+            displayXPos.Value = (decimal)AppConfig.DisplayPositionX;
             displayXPos.ValueChanged += displayXPos_ValueChanged;
-            displayYPos.Value = (decimal) AppConfig.DisplayPositionY;
+            displayYPos.Value = (decimal)AppConfig.DisplayPositionY;
             displayYPos.ValueChanged += displayYPos_ValueChanged;
+            timeOffset.Value = (decimal)AppConfig.LyricsTimeOffset;
+            timeOffset.ValueChanged += timeOffset_ValueChanged;
 
             this.previewLyricsWindow = new LayeredLyricsWindow("サンプルテキストです");
             this.previewLyricsWindow.Show();
@@ -70,44 +76,55 @@ namespace ITMHelper
         {
             FontDialog dialog = new FontDialog();
             dialog.ShowEffects = false;
-            dialog.Font = new Font(new FontFamily(AppConfig.FontFamily), AppConfig.FontSize, (FontStyle) AppConfig.FontStyle);
+            dialog.Font = new Font(new FontFamily(AppConfig.FontFamily), AppConfig.FontSize, (FontStyle)AppConfig.FontStyle);
 
             if (dialog.ShowDialog() != DialogResult.Cancel)
             {
                 AppConfig.FontFamily = dialog.Font.FontFamily.Name;
                 AppConfig.FontSize = dialog.Font.Size;
-                AppConfig.FontStyle = (int) dialog.Font.Style;
+                AppConfig.FontStyle = (int)dialog.Font.Style;
                 this.previewLyricsWindow.Redraw();
             }
         }
 
         private void fontOutlineWidth_ValueChanged(object sender, EventArgs e)
         {
-            AppConfig.FontOutlineWidth = (float) fontOutlineWidth.Value;
+            AppConfig.FontOutlineWidth = (float)fontOutlineWidth.Value;
             this.previewLyricsWindow.Redraw();
         }
 
         private void displayIndex_ValueChanged(object sender, EventArgs e)
         {
-            AppConfig.DisplayIndex = (int) displayIndex.Value;
+            AppConfig.DisplayIndex = (int)displayIndex.Value;
             this.previewLyricsWindow.Redraw();
         }
 
         private void displayXPos_ValueChanged(object sender, EventArgs e)
         {
-            AppConfig.DisplayPositionX = (float) displayXPos.Value;
+            AppConfig.DisplayPositionX = (float)displayXPos.Value;
             this.previewLyricsWindow.Redraw();
         }
 
         private void displayYPos_ValueChanged(object sender, EventArgs e)
         {
-            AppConfig.DisplayPositionY = (float) displayYPos.Value;
+            AppConfig.DisplayPositionY = (float)displayYPos.Value;
             this.previewLyricsWindow.Redraw();
+        }
+
+        private void timeOffset_ValueChanged(object sender, EventArgs e)
+        {
+            AppConfig.LyricsTimeOffset = (float)timeOffset.Value;
+            onChangeTimeOffsetConfigCallback();
         }
 
         private void ConfigForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.previewLyricsWindow.Dispose();
+        }
+
+        public void SetChangeTimeOffsetConfigCallback(onChangeTimeOffsetConfig onChangeTimeOffsetConfigCallback)
+        {
+            this.onChangeTimeOffsetConfigCallback = onChangeTimeOffsetConfigCallback;
         }
     }
 }

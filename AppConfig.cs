@@ -56,10 +56,17 @@ namespace ITMHelper
             get { return float.Parse(ConfigurationManager.AppSettings["DisplayPositionX"]); }
             set { updateAppSetting("DisplayPositionX", value.ToString("F3")); }
         }
+
         public static float DisplayPositionY
         {
             get { return float.Parse(ConfigurationManager.AppSettings["DisplayPositionY"]); }
             set { updateAppSetting("DisplayPositionY", value.ToString("F3")); }
+        }
+
+        public static float LyricsTimeOffset
+        {
+            get { return float.Parse(ConfigurationManager.AppSettings["LyricsTimeOffset"]); }
+            set { updateAppSetting("LyricsTimeOffset", value.ToString("F2")); }
         }
 
         private static void updateAppSetting(string key, string value)

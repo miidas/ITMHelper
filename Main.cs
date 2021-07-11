@@ -249,6 +249,7 @@ namespace ITMHelper
         {
             lyricsDisplay.HideLyrics();
             var form = new ConfigForm();
+            form.SetChangeTimeOffsetConfigCallback(() => lyricsDisplay.LoadConfig());
             form.FormClosed += (cs, ce) => {
                 lyricsDisplay.ClearLyrics(); // Clear cache
                 if (ShowLyricsCheckBox.Checked) lyricsDisplay.ShowLyrics();

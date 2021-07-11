@@ -44,6 +44,9 @@ namespace ITMHelper
             this.displayXPos = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.displayIndex = new System.Windows.Forms.NumericUpDown();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.timeOffset = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.fontColorPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineColorPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineWidth)).BeginInit();
@@ -52,11 +55,13 @@ namespace ITMHelper
             ((System.ComponentModel.ISupportInitialize)(this.displayYPos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.displayXPos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.displayIndex)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.timeOffset)).BeginInit();
             this.SuspendLayout();
             // 
             // fontColorPic
             // 
-            this.fontColorPic.Location = new System.Drawing.Point(6, 36);
+            this.fontColorPic.Location = new System.Drawing.Point(9, 36);
             this.fontColorPic.Name = "fontColorPic";
             this.fontColorPic.Size = new System.Drawing.Size(25, 25);
             this.fontColorPic.TabIndex = 0;
@@ -66,7 +71,7 @@ namespace ITMHelper
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 20);
+            this.label1.Location = new System.Drawing.Point(6, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(31, 13);
             this.label1.TabIndex = 1;
@@ -75,15 +80,15 @@ namespace ITMHelper
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(44, 20);
+            this.label2.Location = new System.Drawing.Point(47, 20);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 13);
+            this.label2.Size = new System.Drawing.Size(66, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Outline Color";
+            this.label2.Text = "Outline color";
             // 
             // fontOutlineColorPic
             // 
-            this.fontOutlineColorPic.Location = new System.Drawing.Point(47, 36);
+            this.fontOutlineColorPic.Location = new System.Drawing.Point(50, 36);
             this.fontOutlineColorPic.Name = "fontOutlineColorPic";
             this.fontOutlineColorPic.Size = new System.Drawing.Size(25, 25);
             this.fontOutlineColorPic.TabIndex = 3;
@@ -118,9 +123,9 @@ namespace ITMHelper
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(117, 20);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 13);
+            this.label3.Size = new System.Drawing.Size(68, 13);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Outline Width";
+            this.label3.Text = "Outline width";
             // 
             // groupBox1
             // 
@@ -223,11 +228,55 @@ namespace ITMHelper
             this.displayIndex.Size = new System.Drawing.Size(39, 20);
             this.displayIndex.TabIndex = 13;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.timeOffset);
+            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Location = new System.Drawing.Point(14, 150);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(303, 49);
+            this.groupBox3.TabIndex = 9;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Lyrics";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(4, 21);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(59, 13);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Time offset";
+            // 
+            // timeOffset
+            // 
+            this.timeOffset.DecimalPlaces = 2;
+            this.timeOffset.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.timeOffset.Location = new System.Drawing.Point(64, 19);
+            this.timeOffset.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.timeOffset.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            -2147483648});
+            this.timeOffset.Name = "timeOffset";
+            this.timeOffset.Size = new System.Drawing.Size(55, 20);
+            this.timeOffset.TabIndex = 1;
+            // 
             // ConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(329, 156);
+            this.ClientSize = new System.Drawing.Size(329, 209);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -245,6 +294,9 @@ namespace ITMHelper
             ((System.ComponentModel.ISupportInitialize)(this.displayYPos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.displayXPos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.displayIndex)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.timeOffset)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -266,5 +318,8 @@ namespace ITMHelper
         private System.Windows.Forms.NumericUpDown displayXPos;
         private System.Windows.Forms.NumericUpDown displayIndex;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.NumericUpDown timeOffset;
+        private System.Windows.Forms.Label label7;
     }
 }
