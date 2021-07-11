@@ -251,7 +251,7 @@ namespace ITMHelper
             var form = new ConfigForm();
             form.FormClosed += (cs, ce) => {
                 lyricsDisplay.ClearLyrics(); // Clear cache
-                lyricsDisplay.ShowLyrics();
+                if (ShowLyricsCheckBox.Checked) lyricsDisplay.ShowLyrics();
             };
             form.ShowDialog(this);
         }
