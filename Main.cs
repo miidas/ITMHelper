@@ -151,11 +151,18 @@ namespace ITMHelper
                 prevTrack = null;
             }
 
-            if ((prevTrack == null && currentTrack != null) || (prevTrack != null && currentTrack == null)
-                || ((prevTrack != null && currentTrack != null) && ((dynamic)currentTrack).TrackDatabaseID != ((dynamic)prevTrack).TrackDatabaseID))
+            try
             {
-                Main_TrackChanged(currentTrack);
-                prevTrack = currentTrack;
+                if ((prevTrack == null && currentTrack != null) || (prevTrack != null && currentTrack == null)
+                    || ((prevTrack != null && currentTrack != null) && ((dynamic)currentTrack).TrackDatabaseID != ((dynamic)prevTrack).TrackDatabaseID))
+                {
+                    Main_TrackChanged(currentTrack);
+                    prevTrack = currentTrack;
+                }
+            }
+            catch (COMException ex) // TODO
+            {
+                //
             }
 
             if (ShowLyricsCheckBox.Checked)
@@ -198,7 +205,7 @@ namespace ITMHelper
                     var pos = position - (position - prevPlayerPosition) + DateTime.Now.Subtract(this.prevDate.Value).TotalSeconds;
                     if (pos < prevPos)
                     {
-                        Console.WriteLine($"Wooosh! PS:{prevPos}, CP:{position}");
+                        //Console.WriteLine($"Wooosh! PS:{prevPos}, CP:{position}");
                     }
                     else
                     {
