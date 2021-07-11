@@ -12,22 +12,18 @@ namespace ITMHelper
 {
     public partial class ConfigForm : Form
     {
-        private onChangeConfig onChangeConfigCallback;
 
         public ConfigForm()
         {
             InitializeComponent();
-
-            fontColorPic.BackColor = ColorTranslator.FromHtml(AppConfig.FontColor);
-            fontOutlineColorPic.BackColor = ColorTranslator.FromHtml(AppConfig.FontOutlineColor);
-            fontOutlineWidth.Value = (decimal) AppConfig.FontOutlineWidth;
         }
 
-        public delegate void onChangeConfig();
-
-        public void setChangeConfigCallback(onChangeConfig onChangeConfigCallback)
+        private void ConfigForm_Load(object sender, EventArgs e)
         {
-            this.onChangeConfigCallback = onChangeConfigCallback;
+            fontColorPic.BackColor = ColorTranslator.FromHtml(AppConfig.FontColor);
+            fontOutlineColorPic.BackColor = ColorTranslator.FromHtml(AppConfig.FontOutlineColor);
+            fontOutlineWidth.Value = (decimal)AppConfig.FontOutlineWidth;
+            fontOutlineWidth.ValueChanged += fontOutlineWidth_ValueChanged;
         }
 
         private void fontColorPic_Click(object sender, EventArgs e)
@@ -41,7 +37,6 @@ namespace ITMHelper
             {
                 fontColorPic.BackColor = dialog.Color;
                 AppConfig.FontColor = ColorTranslator.ToHtml(dialog.Color);
-                onChangeConfigCallback();
             }
         }
 
@@ -56,7 +51,6 @@ namespace ITMHelper
             {
                 fontOutlineColorPic.BackColor = dialog.Color;
                 AppConfig.FontOutlineColor = ColorTranslator.ToHtml(dialog.Color);
-                onChangeConfigCallback();
             }
         }
 
@@ -71,15 +65,12 @@ namespace ITMHelper
                 AppConfig.FontFamily = dialog.Font.FontFamily.Name;
                 AppConfig.FontSize = dialog.Font.Size;
                 AppConfig.FontStyle = (int) dialog.Font.Style;
-                onChangeConfigCallback();
             }
         }
 
         private void fontOutlineWidth_ValueChanged(object sender, EventArgs e)
         {
-            if (onChangeConfigCallback == null) return;
             AppConfig.FontOutlineWidth = (int)fontOutlineWidth.Value;
-            onChangeConfigCallback();
         }
     }
 }

@@ -248,7 +248,6 @@ namespace ITMHelper
         private void configToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = new ConfigForm();
-            form.setChangeConfigCallback(() => {});
             form.ShowDialog(this);
         }
     }

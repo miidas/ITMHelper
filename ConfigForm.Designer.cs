@@ -99,7 +99,6 @@ namespace ITMHelper
             this.fontOutlineWidth.Name = "fontOutlineWidth";
             this.fontOutlineWidth.Size = new System.Drawing.Size(45, 20);
             this.fontOutlineWidth.TabIndex = 5;
-            this.fontOutlineWidth.ValueChanged += new System.EventHandler(this.fontOutlineWidth_ValueChanged);
             // 
             // label3
             // 
@@ -124,6 +123,7 @@ namespace ITMHelper
             this.Controls.Add(this.fontColorPic);
             this.Name = "ConfigForm";
             this.Text = "Config";
+            this.Load += new System.EventHandler(this.ConfigForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.fontColorPic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineColorPic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineWidth)).EndInit();
