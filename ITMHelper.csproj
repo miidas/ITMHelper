@@ -51,11 +51,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfig.cs" />
-    <Compile Include="ConfigForm.cs">
+    <Compile Include="PreferenceForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConfigForm.Designer.cs">
-      <DependentUpon>ConfigForm.cs</DependentUpon>
+    <Compile Include="PreferenceForm.Designer.cs">
+      <DependentUpon>PreferenceForm.cs</DependentUpon>
     </Compile>
     <Compile Include="iTunesHelper.cs" />
     <Compile Include="LayeredLyricsWindow.cs">
@@ -77,8 +77,8 @@
     <Compile Include="Native.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ConfigForm.resx">
-      <DependentUpon>ConfigForm.cs</DependentUpon>
+    <EmbeddedResource Include="PreferenceForm.resx">
+      <DependentUpon>PreferenceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LyricsEditForm.resx">
       <DependentUpon>LyricsEditForm.cs</DependentUpon>

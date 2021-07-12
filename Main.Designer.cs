@@ -145,15 +145,15 @@ namespace ITMHelper
             // editLrcToolStripMenuItem
             // 
             this.editLrcToolStripMenuItem.Name = "editLrcToolStripMenuItem";
-            this.editLrcToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.editLrcToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editLrcToolStripMenuItem.Text = "Edit lrc";
             this.editLrcToolStripMenuItem.Click += new System.EventHandler(this.editLrcToolStripMenuItem_Click);
             // 
             // configToolStripMenuItem
             // 
             this.configToolStripMenuItem.Name = "configToolStripMenuItem";
-            this.configToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
-            this.configToolStripMenuItem.Text = "Config";
+            this.configToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.configToolStripMenuItem.Text = "Preference";
             this.configToolStripMenuItem.Click += new System.EventHandler(this.configToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem

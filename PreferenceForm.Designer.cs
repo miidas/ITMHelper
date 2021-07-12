@@ -1,7 +1,7 @@
 ﻿
 namespace ITMHelper
 {
-    partial class ConfigForm
+    partial class PreferenceForm
     {
         /// <summary>
         /// Required designer variable.
@@ -38,23 +38,23 @@ namespace ITMHelper
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.displayIndex = new System.Windows.Forms.NumericUpDown();
             this.displayYPos = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.displayXPos = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
-            this.displayIndex = new System.Windows.Forms.NumericUpDown();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.timeOffset = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fontColorPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineColorPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineWidth)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.displayIndex)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.displayYPos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.displayXPos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.displayIndex)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.timeOffset)).BeginInit();
             this.SuspendLayout();
@@ -158,6 +158,13 @@ namespace ITMHelper
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Position";
             // 
+            // displayIndex
+            // 
+            this.displayIndex.Location = new System.Drawing.Point(47, 19);
+            this.displayIndex.Name = "displayIndex";
+            this.displayIndex.Size = new System.Drawing.Size(39, 20);
+            this.displayIndex.TabIndex = 13;
+            // 
             // displayYPos
             // 
             this.displayYPos.DecimalPlaces = 3;
@@ -175,6 +182,15 @@ namespace ITMHelper
             this.displayYPos.Name = "displayYPos";
             this.displayYPos.Size = new System.Drawing.Size(51, 20);
             this.displayYPos.TabIndex = 9;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 21);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(41, 13);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Display";
             // 
             // label5
             // 
@@ -212,22 +228,6 @@ namespace ITMHelper
             this.displayXPos.Size = new System.Drawing.Size(51, 20);
             this.displayXPos.TabIndex = 0;
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 21);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(41, 13);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Display";
-            // 
-            // displayIndex
-            // 
-            this.displayIndex.Location = new System.Drawing.Point(47, 19);
-            this.displayIndex.Name = "displayIndex";
-            this.displayIndex.Size = new System.Drawing.Size(39, 20);
-            this.displayIndex.TabIndex = 13;
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.timeOffset);
@@ -238,15 +238,6 @@ namespace ITMHelper
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Lyrics";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(4, 21);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(59, 13);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Time offset";
             // 
             // timeOffset
             // 
@@ -271,7 +262,16 @@ namespace ITMHelper
             this.timeOffset.Size = new System.Drawing.Size(55, 20);
             this.timeOffset.TabIndex = 1;
             // 
-            // ConfigForm
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(4, 21);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(59, 13);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Time offset";
+            // 
+            // PreferenceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -280,10 +280,10 @@ namespace ITMHelper
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "ConfigForm";
-            this.Text = "Config";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ConfigForm_FormClosed);
-            this.Load += new System.EventHandler(this.ConfigForm_Load);
+            this.Name = "PreferenceForm";
+            this.Text = "Preference";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PreferenceForm_FormClosed);
+            this.Load += new System.EventHandler(this.PreferenceForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.fontColorPic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineColorPic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineWidth)).EndInit();
@@ -291,9 +291,9 @@ namespace ITMHelper
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.displayIndex)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.displayYPos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.displayXPos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.displayIndex)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.timeOffset)).EndInit();

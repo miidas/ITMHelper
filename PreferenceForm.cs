@@ -10,16 +10,16 @@ using System.Windows.Forms;
 
 namespace ITMHelper
 {
-    public partial class ConfigForm : Form
+    public partial class PreferenceForm : Form
     {
         private LayeredLyricsWindow previewLyricsWindow = null;
 
-        public ConfigForm()
+        public PreferenceForm()
         {
             InitializeComponent();
         }
 
-        private void ConfigForm_Load(object sender, EventArgs e)
+        private void PreferenceForm_Load(object sender, EventArgs e)
         {
             fontColorPic.BackColor = ColorTranslator.FromHtml(AppConfig.FontColor);
             fontOutlineColorPic.BackColor = ColorTranslator.FromHtml(AppConfig.FontOutlineColor);
@@ -112,7 +112,7 @@ namespace ITMHelper
             AppConfig.LyricsTimeOffset = (float)timeOffset.Value;
         }
 
-        private void ConfigForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void PreferenceForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.previewLyricsWindow.Dispose();
         }

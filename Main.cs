@@ -248,7 +248,7 @@ namespace ITMHelper
         private void configToolStripMenuItem_Click(object sender, EventArgs e)
         {
             lyricsDisplay.HideLyrics();
-            var form = new ConfigForm();
+            var form = new PreferenceForm();
             form.FormClosed += (cs, ce) => {
                 lyricsDisplay.LoadConfig();
                 lyricsDisplay.ClearLyrics(); // Clear cache
