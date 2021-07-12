@@ -168,6 +168,8 @@ namespace ITMHelper
             }
             else if (playerState == 0x01) // ITPlayerStatePlaying
             {
+                this.prevDate = null;
+                lyricsDisplay.ClearLyrics(); // clear cache
                 lyricsDisplay.ShowLyrics();
             }
             this.playerState = playerState;
