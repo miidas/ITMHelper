@@ -14,14 +14,10 @@ namespace ITMHelper
     {
         private LayeredLyricsWindow previewLyricsWindow = null;
 
-        private onChangeTimeOffsetConfig onChangeTimeOffsetConfigCallback;
-
         public ConfigForm()
         {
             InitializeComponent();
         }
-
-        public delegate void onChangeTimeOffsetConfig();
 
         private void ConfigForm_Load(object sender, EventArgs e)
         {
@@ -114,17 +110,11 @@ namespace ITMHelper
         private void timeOffset_ValueChanged(object sender, EventArgs e)
         {
             AppConfig.LyricsTimeOffset = (float)timeOffset.Value;
-            onChangeTimeOffsetConfigCallback();
         }
 
         private void ConfigForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.previewLyricsWindow.Dispose();
-        }
-
-        public void SetChangeTimeOffsetConfigCallback(onChangeTimeOffsetConfig onChangeTimeOffsetConfigCallback)
-        {
-            this.onChangeTimeOffsetConfigCallback = onChangeTimeOffsetConfigCallback;
         }
     }
 }
