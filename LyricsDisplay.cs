@@ -17,7 +17,7 @@ namespace ITMHelper
         private LayeredLyricsWindow currentLyricsWindow = null;
         private LayeredLyricsWindow nextLyricsWindow = null;
 
-        private string currentText = null;
+        private IOneLineLyric currentLyric = null;
 
         private bool EnableLyrics = true;
 
@@ -66,12 +66,13 @@ namespace ITMHelper
 
             if (this.currentLyricsWindow != null)
             {
-                if (String.Equals(lineLyric.Content, this.currentText)) return;
+                if (lineLyric.Timestamp == this.currentLyric.Timestamp) return; // 同じ歌詞が続くとバグる, タイムスタンプで管理?
                 this.currentLyricsWindow.Hide();
                 this.currentLyricsWindow = null;
             }
 
-            this.currentText = lineLyric.Content;
+            this.currentLyric = lineLyric;
+            //this.currentText = lineLyric.Content;
 
             if (String.IsNullOrEmpty(lineLyric.Content))
             {
@@ -90,7 +91,7 @@ namespace ITMHelper
                 }
                 else
                 {
-                    this.currentLyricsWindow = new LayeredLyricsWindow(currentText);
+                    this.currentLyricsWindow = new LayeredLyricsWindow(currentLyric.Content);
                 }
 
                 if (this.EnableLyrics)
@@ -139,7 +140,7 @@ namespace ITMHelper
                 this.currentLyricsWindow = null;
             }
             this.nextLyricsWindow = null;
-            this.currentText = null;
+            this.currentLyric = null;
         }
     }
 }
