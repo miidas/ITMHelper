@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
@@ -17,11 +18,12 @@ namespace ITMHelper
 {
     class LayeredLyricsWindow : Form
     {
+        private static float gDpiY = -1;
 
         public string lyricsText;
 
         private Bitmap bitmap;
-        private float gDpiY;
+        //private float gDpiY;
         private byte alpha = 255;
 
         // Lyrics style
@@ -43,14 +45,17 @@ namespace ITMHelper
             this.FormBorderStyle = FormBorderStyle.None;
             this.StartPosition = FormStartPosition.Manual;
 
-            // Get DpiY
-            using (Graphics g = this.CreateGraphics())
+            // Get DpiY (4~8ms)
+            if (gDpiY == -1)
             {
-                this.gDpiY = g.DpiY;
+                using (Graphics g = this.CreateGraphics())
+                {
+                    gDpiY = g.DpiY;
+                }
             }
 
-            this.LoadConfig();
-            this.PerformDraw();
+            this.LoadConfig(); // 0ms
+            this.PerformDraw(); // 6~10ms
         }
 
         public void Redraw()
@@ -91,11 +96,11 @@ namespace ITMHelper
                 Brush fillBrush = new SolidBrush(ColorTranslator.FromHtml(FontColor));
                 FontFamily fontFamily = new FontFamily(FontFamily);
 
-                gp.AddString("|", fontFamily, FontStyle, this.gDpiY * FontSize / 72f, new Point(0, 0), sf);
+                gp.AddString("|", fontFamily, FontStyle, gDpiY * FontSize / 72f, new Point(0, 0), sf);
                 RectangleF spaceBound = gp.GetBounds();
                 gp.Reset();
 
-                gp.AddString(this.lyricsText, fontFamily, FontStyle, this.gDpiY * FontSize / 72f, new Point(0, 0), sf);
+                gp.AddString(this.lyricsText, fontFamily, FontStyle, gDpiY * FontSize / 72f, new Point(0, 0), sf);
 
                 RectangleF rect = gp.GetBounds();
 

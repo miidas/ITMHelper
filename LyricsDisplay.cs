@@ -1,6 +1,7 @@
 ﻿using Kfstorm.LrcParser;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,9 +57,9 @@ namespace ITMHelper
                 }
             }
 
-            position += 1.0f - LyricsTimeOffset;
+            position -= LyricsTimeOffset;
 
-            IOneLineLyric lineLyric = lrcFile.BeforeOrAt(TimeSpan.FromSeconds(position));
+            IOneLineLyric lineLyric = lrcFile.Before(TimeSpan.FromSeconds(position));
 
             if (lineLyric == null) return;
 
@@ -66,13 +67,15 @@ namespace ITMHelper
 
             if (this.currentLyricsWindow != null)
             {
-                if (lineLyric.Timestamp == this.currentLyric.Timestamp) return; // 同じ歌詞が続くとバグる, タイムスタンプで管理?
-                this.currentLyricsWindow.Hide();
-                this.currentLyricsWindow = null;
+                if (lineLyric.Timestamp == this.currentLyric.Timestamp) return;
+                if (!String.Equals(lineLyric.Content, this.currentLyric.Content))
+                {
+                    this.currentLyricsWindow.Hide();
+                    this.currentLyricsWindow = null;
+                }
             }
 
             this.currentLyric = lineLyric;
-            //this.currentText = lineLyric.Content;
 
             if (String.IsNullOrEmpty(lineLyric.Content))
             {
@@ -84,22 +87,26 @@ namespace ITMHelper
             }
             else
             {
-                if (this.nextLyricsWindow != null)
+                if (this.currentLyricsWindow == null)
                 {
-                    this.currentLyricsWindow = this.nextLyricsWindow;
-                    this.nextLyricsWindow = null;
-                }
-                else
-                {
-                    this.currentLyricsWindow = new LayeredLyricsWindow(currentLyric.Content);
+                    if (this.nextLyricsWindow != null)
+                    {
+                        this.currentLyricsWindow = this.nextLyricsWindow;
+                        this.nextLyricsWindow = null;
+                    }
+                    else
+                    {
+                        this.currentLyricsWindow = new LayeredLyricsWindow(currentLyric.Content);
+                    }
+
+                    if (this.EnableLyrics)
+                    {
+                        this.currentLyricsWindow.Show();
+                    }
                 }
 
-                if (this.EnableLyrics)
-                {
-                    this.currentLyricsWindow.Show();
-                }
-
-                if (lineLyric2 != null && !String.IsNullOrEmpty(lineLyric2.Content))
+                if (lineLyric2 != null && !String.IsNullOrEmpty(lineLyric2.Content) && 
+                    !String.Equals(lineLyric.Content, lineLyric2.Content))
                 {
                     this.nextLyricsWindow = new LayeredLyricsWindow(lineLyric2.Content);
                 }

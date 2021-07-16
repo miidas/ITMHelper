@@ -192,9 +192,12 @@ namespace ITMHelper
                     }
                     else
                     {
+                        //Stopwatch clock = Stopwatch.StartNew();
                         lyricsDisplay.OnChangePlayerPosition(pos);
+                        //clock.Stop();
+                        //Console.WriteLine(clock.Elapsed.Milliseconds + "ms");
                     }
-                    prevPos = position;
+                    prevPos = pos;
                 }
 
                 if (position != prevPlayerPosition)

@@ -145,14 +145,14 @@ namespace ITMHelper
             // editLrcToolStripMenuItem
             // 
             this.editLrcToolStripMenuItem.Name = "editLrcToolStripMenuItem";
-            this.editLrcToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editLrcToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.editLrcToolStripMenuItem.Text = "Edit lrc";
             this.editLrcToolStripMenuItem.Click += new System.EventHandler(this.editLrcToolStripMenuItem_Click);
             // 
             // configToolStripMenuItem
             // 
             this.configToolStripMenuItem.Name = "configToolStripMenuItem";
-            this.configToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.configToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.configToolStripMenuItem.Text = "Preference";
             this.configToolStripMenuItem.Click += new System.EventHandler(this.configToolStripMenuItem_Click);
             // 
@@ -185,6 +185,7 @@ namespace ITMHelper
             this.Controls.Add(this.TitleTextBox);
             this.Controls.Add(this.TitleLabel);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "Main";
