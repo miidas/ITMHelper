@@ -234,7 +234,7 @@ namespace ITMHelper
             this.groupBox3.Controls.Add(this.openButton);
             this.groupBox3.Controls.Add(this.timeOffset);
             this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Location = new System.Drawing.Point(14, 150);
+            this.groupBox3.Location = new System.Drawing.Point(12, 150);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(303, 49);
             this.groupBox3.TabIndex = 9;
