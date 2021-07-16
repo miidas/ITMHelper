@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -115,6 +116,12 @@ namespace ITMHelper
         private void PreferenceForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.previewLyricsWindow.Dispose();
+        }
+
+        private void openButton_Click(object sender, EventArgs e)
+        {
+            var lyricsDir = System.Environment.CurrentDirectory + "\\Lyrics";
+            Process.Start("explorer.exe", lyricsDir);
         }
     }
 }

@@ -47,6 +47,7 @@ namespace ITMHelper
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.timeOffset = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
+            this.openButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.fontColorPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineColorPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineWidth)).BeginInit();
@@ -230,6 +231,7 @@ namespace ITMHelper
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.openButton);
             this.groupBox3.Controls.Add(this.timeOffset);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Location = new System.Drawing.Point(14, 150);
@@ -270,6 +272,16 @@ namespace ITMHelper
             this.label7.Size = new System.Drawing.Size(59, 13);
             this.label7.TabIndex = 0;
             this.label7.Text = "Time offset";
+            // 
+            // openButton
+            // 
+            this.openButton.Location = new System.Drawing.Point(175, 16);
+            this.openButton.Name = "openButton";
+            this.openButton.Size = new System.Drawing.Size(111, 23);
+            this.openButton.TabIndex = 2;
+            this.openButton.Text = "Open Lyrics Folder";
+            this.openButton.UseVisualStyleBackColor = true;
+            this.openButton.Click += new System.EventHandler(this.openButton_Click);
             // 
             // PreferenceForm
             // 
@@ -321,5 +333,6 @@ namespace ITMHelper
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.NumericUpDown timeOffset;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button openButton;
     }
 }
