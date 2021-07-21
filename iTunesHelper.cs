@@ -8,9 +8,9 @@ using System.ComponentModel;
 
 namespace ITMHelper
 {
-    class iTunesHelper:IDisposable
+    class iTunesHelper : IDisposable
     {
-        object iTunesApp;
+        dynamic iTunesApp;
 
         object quitHandler;
 
@@ -20,7 +20,7 @@ namespace ITMHelper
             this.iTunesApp = Activator.CreateInstance(iTunesType);
 
             this.quitHandler = new ITEventGenericHandler(iTunesQuitEvent);
-            ((dynamic)iTunesApp).OnAboutToPromptUserToQuitEvent += this.quitHandler;
+            iTunesApp.OnAboutToPromptUserToQuitEvent += this.quitHandler;
 
             /*foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(this.iTunesApp))
             {
@@ -33,14 +33,14 @@ namespace ITMHelper
 
         private void iTunesQuitEvent()
         {
-            ((dynamic)iTunesApp).OnAboutToPromptUserToQuitEvent -= this.quitHandler;
+            iTunesApp.OnAboutToPromptUserToQuitEvent -= this.quitHandler;
             // TODO: Call handler instead of exiting app
             System.Windows.Forms.Application.Exit();
         }
 
         public object getCurrentTrack()
         {
-            return ((dynamic)iTunesApp).CurrentTrack;
+            return iTunesApp.CurrentTrack;
         }
 
         public Boolean IsTrackInLibrary(object track)
@@ -59,7 +59,7 @@ namespace ITMHelper
         {
             try
             {
-                return ((dynamic)iTunesApp).PlayerPosition;
+                return iTunesApp.PlayerPosition;
             }
             catch (COMException ex)
             {
@@ -69,12 +69,12 @@ namespace ITMHelper
 
         public object getPlayerState()
         {
-            return ((dynamic)iTunesApp).PlayerState;
+            return iTunesApp.PlayerState;
         }
 
         public object getVersion()
         {
-            return ((dynamic)iTunesApp).Version;
+            return iTunesApp.Version;
         }
 
         public void Dispose()
