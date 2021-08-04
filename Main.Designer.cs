@@ -29,6 +29,7 @@ namespace ITMHelper
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.TitleTextBox = new System.Windows.Forms.TextBox();
             this.AlbumTextBox = new System.Windows.Forms.TextBox();
@@ -43,6 +44,7 @@ namespace ITMHelper
             this.configToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutITMHelperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -171,6 +173,11 @@ namespace ITMHelper
             this.aboutITMHelperToolStripMenuItem.Text = "About ITMHelper";
             this.aboutITMHelperToolStripMenuItem.Click += new System.EventHandler(this.aboutITMHelperToolStripMenuItem_Click);
             // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Text = "ITMHelper";
+            this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseDoubleClick);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -192,6 +199,7 @@ namespace ITMHelper
             this.Text = "ITMHelper";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.Load += new System.EventHandler(this.Main_Load);
+            this.Resize += new System.EventHandler(this.Main_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -215,6 +223,7 @@ namespace ITMHelper
         private System.Windows.Forms.ToolStripMenuItem editLrcToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutITMHelperToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem configToolStripMenuItem;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
     }
 }
 

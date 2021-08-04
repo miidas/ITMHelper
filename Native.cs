@@ -86,7 +86,7 @@ namespace ITMHelper
             // ShowWindow function (winuser.h)
             // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
             [DllImport("user32.dll", CharSet = CharSet.Auto)]
-            internal static extern int ShowWindow(IntPtr hWnd, int nCmdShow);
+            public static extern int ShowWindow(IntPtr hWnd, int nCmdShow);
         }
     }
 }

@@ -61,6 +61,8 @@ namespace ITMHelper
 
             this.ActiveControl = NowPlayingButton; // Setting the focus on NowPlaying button
 
+            this.notifyIcon.Icon = this.Icon; // Set icon to notifyIcon
+
             System.Diagnostics.Process.GetCurrentProcess().PriorityClass = System.Diagnostics.ProcessPriorityClass.RealTime; // Change app priority?
         }
 
@@ -260,6 +262,30 @@ namespace ITMHelper
                 if (ShowLyricsCheckBox.Checked) lyricsDisplay.ShowLyrics();
             };
             form.ShowDialog(this);
+        }
+
+        private void Main_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.Hide();
+                this.notifyIcon.Visible = true;
+            }
+            else if (this.WindowState == FormWindowState.Normal)
+            {
+                this.notifyIcon.Visible = false;
+            }
+        }
+
+        private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
+
+            // TODO: 
+            // Open
+            // Enable Lyrics
+            // Exit
         }
     }
 }
