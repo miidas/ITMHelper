@@ -176,7 +176,7 @@ namespace ITMHelper
             // notifyIcon
             // 
             this.notifyIcon.Text = "ITMHelper";
-            this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseDoubleClick);
+            this.notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseClick);
             // 
             // Main
             // 
