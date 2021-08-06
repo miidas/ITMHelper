@@ -45,7 +45,11 @@ namespace ITMHelper
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutITMHelperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.notifyMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
+            this.notifyMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // TitleLabel
@@ -175,8 +179,31 @@ namespace ITMHelper
             // 
             // notifyIcon
             // 
+            this.notifyIcon.ContextMenuStrip = this.notifyMenuStrip;
             this.notifyIcon.Text = "ITMHelper";
             this.notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseClick);
+            // 
+            // notifyMenuStrip
+            // 
+            this.notifyMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openMenuItem,
+            this.exitMenuItem});
+            this.notifyMenuStrip.Name = "notifyMenuStrip";
+            this.notifyMenuStrip.Size = new System.Drawing.Size(181, 70);
+            // 
+            // exitMenuItem
+            // 
+            this.exitMenuItem.Name = "exitMenuItem";
+            this.exitMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitMenuItem.Text = "Exit";
+            this.exitMenuItem.Click += new System.EventHandler(this.exitMenuItem_Click);
+            // 
+            // openMenuItem
+            // 
+            this.openMenuItem.Name = "openMenuItem";
+            this.openMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openMenuItem.Text = "Open";
+            this.openMenuItem.Click += new System.EventHandler(this.openMenuItem_Click);
             // 
             // Main
             // 
@@ -202,6 +229,7 @@ namespace ITMHelper
             this.Resize += new System.EventHandler(this.Main_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.notifyMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -224,6 +252,9 @@ namespace ITMHelper
         private System.Windows.Forms.ToolStripMenuItem aboutITMHelperToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem configToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.ContextMenuStrip notifyMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem openMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
     }
 }
 
