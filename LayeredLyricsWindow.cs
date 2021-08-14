@@ -107,7 +107,17 @@ namespace ITMHelper
                 this.Width = (int) Math.Round(rect.Width + spaceBound.Width * 15);
                 this.Height = (int) Math.Round(spaceBound.Height * 1.5);
 
-                var bounds = Screen.AllScreens[this.DisplayIndex].Bounds;
+                Rectangle bounds;
+
+                if (Screen.AllScreens.Length <= this.DisplayIndex)
+                {
+                    // Fall back to the primary screen due to a temporary reason
+                    bounds = Screen.PrimaryScreen.Bounds;
+                }
+                else
+                {
+                    bounds = Screen.AllScreens[this.DisplayIndex].Bounds;
+                }
 
                 var lp = new Point(
                     (int) (bounds.Left + (Screen.GetBounds(this).Width * this.DisplayPositionX) - (this.Width / 2)),
