@@ -41,7 +41,7 @@ namespace ITMHelper
 
         private void Main_Load(object sender, EventArgs e)
         {
-            var lyricsDir = System.Environment.CurrentDirectory + "\\Lyrics";
+            var lyricsDir = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\Lyrics";
             if (!Directory.Exists(lyricsDir))
             {
                 Directory.CreateDirectory(lyricsDir);
@@ -100,7 +100,8 @@ namespace ITMHelper
                     return;
                 }
 
-                var lyricsDir = System.Environment.CurrentDirectory + "\\Lyrics";
+                var lyricsDir = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\Lyrics";
+
                 try
                 {
                     // Use escaped filename instead of TrackDatabaseID for readability
